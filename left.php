@@ -41,7 +41,7 @@
 	<tr>
 		<td align="right" ><font face="標楷體" color="#009900">
 		<a target="main" style="color: #009900" href="new.php"> 
-    <img src="new.jpg" width="40"><span style="text-decoration: none">新增會員</span></a></font></td>
+    <img src="rsc\new.jpg" width="40"><span style="text-decoration: none">新增會員</span></a></font></td>
 	</tr>
 	<tr>
 	<tr> <td><hr> </td></tr>
@@ -49,12 +49,12 @@
 	<tr>
 		<td align="right" ><font face="標楷體"><a style="color: #9900FF" href="class.php">
 		<span style="text-decoration: none; font-weight:700">課程登記</span>
-    <img src="attend.jpg" width="40"></a></font>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
+    <img src="rsc\attend.jpg" width="40"></a></font>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
 	</tr>
 	<tr> <td><hr> </td></tr>
 	<tr>
 		<td align="right" ><font face="標楷體"><a target="main" href="quota.php">
-    <img src="update.jpg" width="40" >
+    <img src="rsc\update.jpg" width="40" >
 		<span style="text-decoration: none; color: #990000">堂數修改</span></a></font></td>
 	</tr>
 	<tr> <td><hr> </td></tr>
@@ -66,7 +66,7 @@
 	<tr>
 		<td align="right" ><font face="標楷體">&nbsp;<a style="color: #009999" href="mblist.php?ordmid=1">
       <span style="text-decoration: none">會員列表</span>
-    <img src="mlist.jpg" width="40"></a></font>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
+    <img src="rsc\mlist.jpg" width="40"></a></font>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
 	</tr>
 	<tr> <td><hr> </td></tr>
   <!--
@@ -82,7 +82,7 @@
   -->
 	<tr>
 		<td align="right" ><font face="標楷體"><a style="color: #0000FF" href="emaillist.php">
-    <img src="ann.jpg" width="40" >
+    <img src="rsc\ann.jpg" width="40" >
     <span style="text-decoration: none">通知會員</span>
     </a></font></td>
 	</tr>
@@ -98,7 +98,7 @@
 	<tr>
 		<td align="right" ><font face="標楷體"><a style="color: #0000FF" href="main.php">
       進階查詢</font>
-      <img src="search.jpg" width="40" >
+      <img src="rsc\search.jpg" width="40" >
       </a>
     </td>
 	</tr>
