@@ -229,7 +229,7 @@
 							//$chgtime = getdate($chglist[$i]["time"]); 
 							echo gmdate("Y/m/d (D) H:i:s", intval($chglist[$i]["time"]));
 							$birth = gmdate("m/d", intval($mlist[0]["birth"]));
-							if ($birth == $today = gmdate("m/d", intval($now)) ) $birth = "<img border=\"0\" src=\"cake.jpg\" width=\"40\" ></img>";
+							if ($birth == $today = gmdate("m/d", intval($now)) ) $birth = "<img border=\"0\" src=\"rsc\cake.jpg\" width=\"40\" ></img>";
 							else $birth = "";
 							
 						?>			

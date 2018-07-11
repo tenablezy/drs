@@ -23,8 +23,8 @@
 ?>
 <head>
 <meta http-equiv="refresh" content="<?php echo $refresh*60;?>">
-<?php header('Content-type: text/html; charset=big5'); ?>
-<title>·s¼Wºô­¶3</title>
+<?php header('Content-type: text/html; charset=utf-8'); ?>
+<title>æ–°å¢žç¶²é 3</title>
 <base target="main">
 </head>
 
@@ -32,91 +32,91 @@
 
 <table align="right"  border="0" width="88%" id="table1">
 	<tr>
-		<td align="right" ><font face="¼Ð·¢Åé" color="#0099FF"><a target="main" href="class.php">
+		<td align="right" ><font face="æ¨™æ¥·é«”" color="#0099FF"><a target="main" href="class.php">
 		<span style="text-decoration: none; color: #0099FF"></span></font>
-    <img src="logo.gif" height="80" width="120"></font></a>
+    <img src="rsc/logo.gif" height="80" width="120"></font></a>
     </td>
 	</tr>
 	<tr> <td><hr> </td></tr>
 	<tr>
-		<td align="right" ><font face="¼Ð·¢Åé" color="#009900">
+		<td align="right" ><font face="æ¨™æ¥·é«”" color="#009900">
 		<a target="main" style="color: #009900" href="new.php"> 
-    <img src="rsc\new.jpg" width="40"><span style="text-decoration: none">·s¼W·|­û</span></a></font></td>
+    <img src="rsc/new.jpg" width="40"><span style="text-decoration: none">æ–°å¢žæœƒå“¡</span></a></font></td>
 	</tr>
 	<tr>
 	<tr> <td><hr> </td></tr>
 	</tr>
 	<tr>
-		<td align="right" ><font face="¼Ð·¢Åé"><a style="color: #9900FF" href="class.php">
-		<span style="text-decoration: none; font-weight:700">½Òµ{µn°O</span>
-    <img src="rsc\attend.jpg" width="40"></a></font>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
+		<td align="right" ><font face="æ¨™æ¥·é«”"><a style="color: #9900FF" href="class.php">
+		<span style="text-decoration: none; font-weight:700">èª²ç¨‹ç™»è¨˜</span>
+    <img src="rsc/attend.jpg" width="40"></a></font>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
 	</tr>
 	<tr> <td><hr> </td></tr>
 	<tr>
-		<td align="right" ><font face="¼Ð·¢Åé"><a target="main" href="quota.php">
-    <img src="rsc\update.jpg" width="40" >
-		<span style="text-decoration: none; color: #990000">°ó¼Æ­×§ï</span></a></font></td>
-	</tr>
-	<tr> <td><hr> </td></tr>
-  <!--
-	<tr>
-		<td align="right" ><font face="¼Ð·¢Åé">¬d&nbsp;&nbsp;&nbsp; ¸ß</font></td>
-	</tr>
-  -->
-	<tr>
-		<td align="right" ><font face="¼Ð·¢Åé">&nbsp;<a style="color: #009999" href="mblist.php?ordmid=1">
-      <span style="text-decoration: none">·|­û¦Cªí</span>
-    <img src="rsc\mlist.jpg" width="40"></a></font>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
+		<td align="right" ><font face="æ¨™æ¥·é«”"><a target="main" href="quota.php">
+    <img src="rsc/update.jpg" width="40" >
+		<span style="text-decoration: none; color: #990000">å ‚æ•¸ä¿®æ”¹</span></a></font></td>
 	</tr>
 	<tr> <td><hr> </td></tr>
   <!--
 	<tr>
-		<td align="right" ><font face="¼Ð·¢Åé">&nbsp;·|­û¸ê®Æ</font></td>
-	</tr>
-	<tr>
-		<td align="right" ><font face="¼Ð·¢Åé">&nbsp;...</font></td>
-	</tr>
-	<tr>
-		<td align="right" ><font face="¼Ð·¢Åé">&nbsp;...</font></td>
+		<td align="right" ><font face="æ¨™æ¥·é«”">æŸ¥&nbsp;&nbsp;&nbsp; è©¢</font></td>
 	</tr>
   -->
 	<tr>
-		<td align="right" ><font face="¼Ð·¢Åé"><a style="color: #0000FF" href="emaillist.php">
-    <img src="rsc\ann.jpg" width="40" >
-    <span style="text-decoration: none">³qª¾·|­û</span>
+		<td align="right" ><font face="æ¨™æ¥·é«”">&nbsp;<a style="color: #009999" href="mblist.php?ordmid=1">
+      <span style="text-decoration: none">æœƒå“¡åˆ—è¡¨</span>
+    <img src="rsc/mlist.jpg" width="40"></a></font>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
+	</tr>
+	<tr> <td><hr> </td></tr>
+  <!--
+	<tr>
+		<td align="right" ><font face="æ¨™æ¥·é«”">&nbsp;æœƒå“¡è³‡æ–™</font></td>
+	</tr>
+	<tr>
+		<td align="right" ><font face="æ¨™æ¥·é«”">&nbsp;...</font></td>
+	</tr>
+	<tr>
+		<td align="right" ><font face="æ¨™æ¥·é«”">&nbsp;...</font></td>
+	</tr>
+  -->
+	<tr>
+		<td align="right" ><font face="æ¨™æ¥·é«”"><a style="color: #0000FF" href="emaillist.php">
+    <img src="rsc/ann.jpg" width="40" >
+    <span style="text-decoration: none">é€šçŸ¥æœƒå“¡</span>
     </a></font></td>
 	</tr>
 	<tr> <td><hr> </td></tr>
   <!--
 	<tr>
-		<td align="right" ><font face="¼Ð·¢Åé">...</font></td>
+		<td align="right" ><font face="æ¨™æ¥·é«”">...</font></td>
 	</tr>
   -->
 	<tr>
-		<td>¡@</td>
+		<td>ã€€</td>
 	</tr>
 	<tr>
-		<td align="right" ><font face="¼Ð·¢Åé"><a style="color: #0000FF" href="main.php">
-      ¶i¶¥¬d¸ß</font>
-      <img src="rsc\search.jpg" width="40" >
+		<td align="right" ><font face="æ¨™æ¥·é«”"><a style="color: #0000FF" href="main.php">
+      é€²éšŽæŸ¥è©¢</font>
+      <img src="rsc/search.jpg" width="40" >
       </a>
     </td>
 	</tr>
 	<tr> <td><hr> </td></tr>
 	<tr>
-		<td align="right" ><font face="¼Ð·¢Åé" color="#0000FF"><a target="main" href="backup.php">
-		<span style="text-decoration: none; color: #0000FF">¨t²Î³Æ¥÷</span></a></font></td>
+		<td align="right" ><font face="æ¨™æ¥·é«”" color="#0000FF"><a target="main" href="backup.php">
+		<span style="text-decoration: none; color: #0000FF">ç³»çµ±å‚™ä»½</span></a></font></td>
 	</tr>
 	<tr>
-		<td align="right" ><font face="¼Ð·¢Åé" color="#0000FF"><a href="info.php">
-		<span style="text-decoration: none; color: #555555">¨t²Î¸ê°T</span></a></font></td>
+		<td align="right" ><font face="æ¨™æ¥·é«”" color="#0000FF"><a href="info.php">
+		<span style="text-decoration: none; color: #555555">ç³»çµ±è³‡è¨Š</span></a></font></td>
 	</tr>
 
  <tr>
 		<td> 
 	<font size="4"><font color=blue><?php echo gmdate("Y/m/d(D) H:i:s", intval($now));?></font>
 	<BR>
-	<font size="2">ª©¥»:<font color=blue><?php echo $version;?>_<?php echo $ver_date;?></font>
+	<font size="2">ç‰ˆæœ¬:<font color=blue><?php echo $version;?>_<?php echo $ver_date;?></font>
 	
 
         </td></tr>

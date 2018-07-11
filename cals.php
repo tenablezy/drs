@@ -59,7 +59,7 @@
 				//echo $brlist[$i]["pas"];
 				if ($brlist[$i]["pas"] == 0) {
 			?>
-			<img border="0" src="cake.jpg" width="40" ></td>
+			<img border="0" src="rsc\cake.jpg" width="40" ></td>
 			<?php } ?>
 	</tr>
 	<?php } //mysqli_close($link);	 
