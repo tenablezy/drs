@@ -27,9 +27,9 @@
 
 	if (empty($now)) {$showm=1;$now = getNow();}
 	//localtime(time(),true);
-	//echo gmdate("Y/m/d 00:00:00", intval($now));
-	//$today = strtotime(gmdate("Y/m/d  H:i:s", intval($now)))+ 8 * 60 * 60;
-	$today = my_strtotime(gmdate("Y/m/d", intval($now)));
+	//echo my_gmdate("Y/m/d 00:00:00", intval($now));
+	//$today = strtotime(my_gmdate("Y/m/d  H:i:s", intval($now)))+ 8 * 60 * 60;
+	$today = my_strtotime(my_gmdate("Y/m/d", intval($now)));
 	//echo $today."-".$now."-".strtotime("2008/04/06");
 
 	if ( !empty($addwav) && $addwav)
@@ -39,7 +39,7 @@
 		//header('Location: class.php');
 	}
 	
-	//echo "-".gmdate("Y/m/d H:m", intval($today));
+	//echo "-".my_gmdate("Y/m/d H:m", intval($today));
 	if ( !empty($mid)) $addcls="sendout";
 	//echo $addcls;
 	if (!empty($addcls) && !empty($mid)) {
@@ -83,7 +83,7 @@
 			    $mlist[0]["mid"].
 			    "> ".$mlist[0]["name"].
 				"(".$mlist[0]["mid"].")</a> 會員已到期<br>最近一次更新 ".
-				gmdate("Y/m/d (D) H:i:s", intval($mlist[0]["class_start_time"]));
+				my_gmdate("Y/m/d (D) H:i:s", intval($mlist[0]["class_start_time"]));
 			?><embed src="chord.wav" autoplay=true hidden=true></embed><?php
 			exit(1);
 		} else {
@@ -99,7 +99,7 @@
   $book_num = getBook($book_list);
   $selbook_num = getBookByOrder ($selbook_list);
 ?>
-<p><b><font size="5">課程登記</font> <font size="5" color=blue><b><?php echo gmdate("Y/m/d (D) H:i:s", intval($now));?></b></font>
+<p><b><font size="5">課程登記</font> <font size="5" color=blue><b><?php echo my_gmdate("Y/m/d (D) H:i:s", intval($now));?></b></font>
 <hr>
 <form method="post" action="class.php">
 	
@@ -113,7 +113,7 @@
     {
 		if($selbook_list[$i]["studio"] != "delete" && $selbook_list[$i]["online"] == 1){
 			echo "<option value=\"".$selbook_list[$i]["sn"]."\"";
-		    if ( $bid == $selbook_list[$i]["sn"])
+		    if ( $bid == $selbook_list[$i]["sn"] && $bid)
 			    echo " selected ";
 		    echo " >". 
 				"[".$selbook_list[$i]["studio"]."] ".
@@ -132,41 +132,63 @@
 </form>
 <p>今日登記人數: <b><font color="#0000FF" size="5"><?php echo $chgcount;?></font></b> 人次</p>
 
+<a href="book_mngr.php">Book Manager</a>  
 <!-- class A -->
 <table border="1" width="70%" id="book">
 	<tr>
-		<td width="10%" bgcolor="#dddddddd"><center><font color="blue">Studio A</font></center></td>
-		<td width="13%" bgcolor="#dddddddd"><center>一</center></td>
-		<td width="13%" bgcolor="#dddddddd"><center>二</center></td>
-		<td width="13%" bgcolor="#dddddddd"><center>三</center></td>
-		<td width="13%" bgcolor="#dddddddd"><center>四</center></td>
-		<td width="13%" bgcolor="#dddddddd"><center>五</center></td>
-		<td width="13%" bgcolor="#dddddddd"><center>六</center></td>
-		<td width="13%" bgcolor="#dddddddd"><center>日</center></td>
+		<td width="10%" bgcolor="#ccfef6"><center><font color="blue">Studio A</font></center></td>
+		<td rowspan="2" width="13%" bgcolor="#dddddd"><center><font size=5><b>一</b></center></td>
+		<td rowspan="2" width="13%" bgcolor="#dddddd"><center><font size=5><b>二</b></center></td>
+		<td rowspan="2" width="13%" bgcolor="#dddddd"><center><font size=5><b>三</b></center></td>
+		<td rowspan="2" width="13%" bgcolor="#dddddd"><center><font size=5><b>四</b></center></td>
+		<td rowspan="2" width="13%" bgcolor="#dddddd"><center><font size=5><b>五</b></center></td>
+		<td rowspan="2" width="13%" bgcolor="#dddddd"><center><font size=5><b>六</b></center></td>
+		<td rowspan="2" width="13%" bgcolor="#dddddd"><center><font size=5><b>日</b></center></td>
 	</tr>
 
+	<tr> 
+		<td width="10%" bgcolor="#aeffce"><center><font color="blue">Studio B</font></center></td>
+  </tr>
+
 	<tr>
-		<td width="%" bgcolor="#dddddddd"><center>15:00 <br>(a) 16:30</center></td>
+		<td rowspan="2" width="%" bgcolor="#dddddddd"><center><font size=5><b>(a)</b></font> 15:00 ~ 16:30</center></td>
     <?php echoclassbook ($book_list, $book_num, "A", "a"); ?>
 	</tr>
+	  <tr>
+      <?php echoclassbook ($book_list, $book_num, "B", "a"); ?>
+	  </tr>
 
+	<tr> </tr>
 	<tr>
-		<td width="" bgcolor="#dddddddd"><center>17:00 <br>(b) 18:15</center></td>
+		<td rowspan="2" width="" bgcolor="#dddddddd"><center><font size=5><b>(b)</b></font> 17:00 ~ 18:15</center></td>
     <?php echoclassbook ($book_list, $book_num, "A", "b"); ?>
 	</tr>
+	  <tr>
+      <?php echoclassbook ($book_list, $book_num, "B", "b"); ?>
+	  </tr>
 
+	<tr> </tr>
 	<tr>
-		<td width="" bgcolor="#dddddddd"><center>19:00 <br>(c) 20:15</center></td>
+		<td rowspan="2" width="" bgcolor="#dddddddd"><center><font size=5><b>(c)</b></font> 19:00 ~ 20:15</center></td>
     <?php echoclassbook ($book_list, $book_num, "A", "c"); ?>
 	</tr>
+	  <tr>
+      <?php echoclassbook ($book_list, $book_num, "B", "c"); ?>
+	  </tr>
 
+	<tr> </tr>
 	<tr>
-		<td width="" bgcolor="#dddddddd"><center>20:30 <br>(d) 21:45</center></td>
+		<td rowspan="2" width="" bgcolor="#dddddddd"><center><font size=5><b>(d)</b></font> 20:30 ~ 21:45</center></td>
     <?php echoclassbook ($book_list, $book_num, "A", "d"); ?>
 	</tr>
+	  <tr>
+      <?php echoclassbook ($book_list, $book_num, "B", "d"); ?>
+	  </tr>
+
 </table>
 
 <!-- class B -->
+<!-- 
 <table border="1" width="70%" id="book">
 	<tr>
 		<td width="10%" bgcolor="#dddddddd"><center><font color="blue">Studio B</font></center></td>
@@ -199,14 +221,16 @@
     <?php echoclassbook ($book_list, $book_num, "B", "d"); ?>
 	</tr>
 </table>
-<a href="book_mngr.php">Book Manager</a>  <a href="http://www.lumi-dance-school.com/files/schedule/schedule.jpg" target="_blank">Link Schedule</a>
+-->
+
+<!--  <a href="http://www.lumi-dance-school.com/files/schedule/schedule.jpg" target="_blank">Link Schedule</a> -->
 
 
 <p>上課列表:</p>
 <table border="1" width="70%" id="table1">
 	<tr>
 		<td width="5%">時間</td>
-		<td width="25%">會員編號 <br>(剩餘堂數 at <?php echo $nowdatetime;?>)</td>
+		<td width="25%">會員編號 <!--<br>(剩餘堂數 at <?php echo $nowdatetime;?>)--></td>
 		<td width="15%">姓名</td>
 		<td width="15%">剩餘課堂</td>
 	</tr>
@@ -227,9 +251,9 @@
 		<td width="18%" bgcolor="<?php echo $cc;?>">
 			<?php 
 							//$chgtime = getdate($chglist[$i]["time"]); 
-							echo gmdate("Y/m/d (D) H:i:s", intval($chglist[$i]["time"]));
-							$birth = gmdate("m/d", intval($mlist[0]["birth"]));
-							if ($birth == $today = gmdate("m/d", intval($now)) ) $birth = "<img border=\"0\" src=\"rsc\cake.jpg\" width=\"40\" ></img>";
+							echo my_gmdate("Y/m/d (D) H:i:s", intval($chglist[$i]["time"]));
+							$birth = my_gmdate("m/d", intval($mlist[0]["birth"]));
+							if ($birth == $today = my_gmdate("m/d", intval($now)) ) $birth = "<img border=\"0\" src=\"rsc\cake.jpg\" width=\"40\" ></img>";
 							else $birth = "";
 							
 						?>			

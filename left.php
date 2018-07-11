@@ -4,8 +4,8 @@
 	
 
 	  $now = getNow();
-	  $bkh= gmdate("H", intval($now));
-	  $bki= gmdate("i", intval($now));
+	  $bkh= my_gmdate("H", intval($now));
+	  $bki= my_gmdate("i", intval($now));
     $refresh = 10;
 
     if (!isset($order)) $order = "";
@@ -114,7 +114,7 @@
 
  <tr>
 		<td> 
-	<font size="4"><font color=blue><?php echo gmdate("Y/m/d(D) H:i:s", intval($now));?></font>
+	<font size="4"><font color=blue><?php echo my_gmdate("Y/m/d(D) H:i:s", intval($now));?></font>
 	<BR>
 	<font size="2">版本:<font color=blue><?php echo $version;?>_<?php echo $ver_date;?></font>
 	

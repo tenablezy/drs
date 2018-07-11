@@ -34,7 +34,9 @@
 	function getNow()
 	{
 	global $TIME_OFFSET;
+	return 1531330762+3*60*24+8*60+1*60*60+35*60 - 7*24*60*60;
 	return time() + $TIME_OFFSET;
+
 		return time() + 8 * 60 * 60;
 	$today = getdate();
 	$today_s = $today["year"].":".$today["mon"].":".$today["mday"]." ".
@@ -45,7 +47,7 @@
 	/*return strtotime("now");*/
 	}
 	
-	$nowdatetime = gmdate("Y/m/d(D) H:i:s", intval(getNow()));
+	$nowdatetime = my_gmdate("Y/m/d(D) H:i:s", intval(getNow()));
 
 	date_default_timezone_set('Asia/Taipei');
 
@@ -89,7 +91,11 @@
 	
 	function my_gmdate ($fmt, $tm)
 	{
-		return gmdate($fmt, intval($tm));
+		$gmd = gmdate($fmt, intval($tm));
+
+    // fake time
+		//$gmd = gmdate($fmt, 1531330762+3*60*24+8*60+1*60*60+35*60 - 7*24*60*60);
+    return $gmd;
 	}
 
 	function my_strtotime ($time_str)
@@ -131,7 +137,7 @@
 		global $mysqli_host,$mysqli_user,$mysqli_password,$db_name;
 
 			$now = getNow();
-			$bpdate = gmdate("Ymd_H_i_s", intval($now));
+			$bpdate = my_gmdate("Ymd_H_i_s", intval($now));
       echo $bpdate;
 
 
@@ -590,7 +596,7 @@
 	
 		global $MAX_PAGE;
 		$totime = $time + $du;
-		//echo gmdate("m/d", intval($time))."~".$totime;
+		//echo my_gmdate("m/d", intval($time))."~".$totime;
 		$link = openmysql();
 		
 		$query = "SELECT * FROM `change` WHERE `type` = '5' AND CAST(`time` AS UNSIGNED) >= $time ".
@@ -615,7 +621,7 @@
 	
 		global $MAX_PAGE;
 		$totime = $time + $du;
-		//echo gmdate("m/d", intval($time))."~".$totime;
+		//echo my_gmdate("m/d", intval($time))."~".$totime;
 		$link = openmysql();
 		
 		$query = "SELECT * FROM `register` WHERE CAST(`time` AS UNSIGNED) >= $time ".
@@ -652,7 +658,7 @@
 				$list[$rt] = $row;
 				$list[$rt]["pas"] = $n - $f;
 				$rt ++;
-				//echo gmdate("m/d", intval($now)). gmdate("m/d", intval($row["birth"]))."<BR>";
+				//echo my_gmdate("m/d", intval($now)). my_gmdate("m/d", intval($row["birth"]))."<BR>";
 				
 			}
 		}
@@ -695,34 +701,38 @@
   }
 
 
-	function mapNow2class (&$day, &$time, $margin=0) {
+	function mapNow2class (&$day, &$time, $margin=0, $end_margin) {
 
 		$now = getnow();
-		$day = gmdate("N", intval($now));
+		$day = my_gmdate("N", intval($now));
 
-		$hr = gmdate("H", intval($now));
-		$mt = gmdate("i", intval($now));
+		$hr = my_gmdate("H", intval($now));
+		$mt = my_gmdate("i", intval($now));
 
 		$class_chk = mktime($hr, $mt);
 
+    if (!isset($end_margin)) $end_margin = $margin;
+    //echo "end_margin=".$end_margin;
+
 		$class_st[0] = mktime(15, 00) - $margin; 
-		$class_en[0] = mktime(16, 30) + $margin;
+		$class_en[0] = mktime(16, 30) + $end_margin;
 		$class_na[0] = "a";
 
 		$class_st[1] = mktime(17, 00) - $margin; 
-		$class_en[1] = mktime(18, 15) + $margin;
+		$class_en[1] = mktime(18, 15) + $end_margin;
 		$class_na[1] = "b";
 
-		$class_st[2] = mktime(18, 45) - $margin; 
-		$class_en[2] = mktime(20, 00) + $margin;
+		$class_st[2] = mktime(19, 00) - $margin; 
+		$class_en[2] = mktime(20, 15) + $end_margin;
 		$class_na[2] = "c";
 
 		$class_st[3] = mktime(20, 30) - $margin; 
-		$class_en[3] = mktime(21, 45) + $margin;
+		$class_en[3] = mktime(21, 45) + $end_margin;
 		$class_na[3] = "d";
 
 		$time = "n/a";
-		for ($i = 0 ; $i < 4 ; $i ++ ) {
+		for ($i = 3 ; $i >= 0 ; $i -- ) {
+      //echo "<br>".$class_st[$i]. "<". $class_chk ."<". $class_en[$i];
 			if ( $class_st[$i] <=  $class_chk &&  $class_chk <= $class_en[$i]) {
 				$time = $class_na[$i];
 				break;
@@ -815,6 +825,11 @@
 	  }
 	}
 
+	$book_list[$count]["sn"] = 0;
+	$book_list[$count]["studio"] = "-----";
+	$book_list[$count]["online"] = 1;
+	$count ++;
+
 	for ( $i = 0 ; $i < $num ; $i ++ ) {
 	  if (!$list[$i]["online"]) continue;
 	  if (!$list[$i]["day"]) continue;
@@ -892,27 +907,31 @@
 
   function echoclassbook ($book_list, $book_num, $studio, $time, $chkonline = 1) {
 
-	  mapNow2class ($chk_day, $chk_time);
+	  mapNow2class ($chk_day, $chk_time, 10*60, 0);
 	   /*gmdate("Y/m/d(D) H:i:s", intval($now));*/
-	  /*($chk_time = gmdate("d", intval(getnow()))*/
-	  /*echo $chk_day.".".$chk_time;*/
+	  /*($chk_time = my_gmdate("d", intval(getnow()))*/
+	  //echo $chk_day.".".$chk_time;
 
 	  /*echo $chkonline;*/
 	  for ( $j = 1 ; $j <= 7 ; $j ++) {
 		if ( $chk_day == $j && $chk_time == $time) {
-		  echo "<td width=\"\" bgcolor=\"#eeee00\"><font size=2> ";
+		  echo "<td width=\"\" bgcolor=\"#eeee00\"><font size=4>";
 		} else {
-		  echo "<td width=\"\" bgcolor=\"\"><font size=2> ";
+      if ($studio == "A" ) {
+		    echo "<td width=\"\" bgcolor=\"#ccfef6\"><font size=4>";
+      } else {
+		    echo "<td width=\"\" bgcolor=\"#aeffce\"><font size=4>";
+      }
 		}
 		for ($i = 0 ; $i < $book_num ; $i ++) {
 
 		  if ($book_list[$i]["studio"] == $studio && $book_list[$i]["time"] == $time && $book_list[$i]["day"] == $j) {
 
 			if (($book_list[$i]["online"] == 1 && $chkonline) || !$chkonline) {
-			  echo "<br>";
+			  echo "";
 			  if ($book_list[$i]["online"] == 1) echo "<font color=\"#015902\"><b>";
 			  echo "<i>".$book_list[$i]["teacher"]."</i>";
-			  echo "<br><a href=\"book_mngr.php?sn=".$book_list[$i]["sn"]."\">";
+			  echo "<font size=2><br><a href=\"book_mngr.php?sn=".$book_list[$i]["sn"]."\">";
 			  echo $book_list[$i]["name"];
 			  echo "</a>";
 			  //echo "<br>"." (".$book_list[$i]["sub_name"].")";
