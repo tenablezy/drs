@@ -103,7 +103,8 @@
 <hr>
 <form method="post" action="class.php">
 	
-<?php if ($showm) { ?>
+<?php if ($showm) { 
+  ?>
 	<p>請輸入會員編號 <input type="text" name="mid" size="25" id="mid" >
  
 	<select size="1" name="bid">
@@ -152,37 +153,37 @@
 
 	<tr>
 		<td rowspan="2" width="%" bgcolor="#dddddddd"><center><font size=5><b>(a)</b></font> 15:00 ~ 16:30</center></td>
-    <?php echoclassbook ($book_list, $book_num, "A", "a"); ?>
+    <?php echoclassbook ($book_list, $book_num, "A", "a",NULL,$chglist); ?>
 	</tr>
 	  <tr>
-      <?php echoclassbook ($book_list, $book_num, "B", "a"); ?>
+      <?php echoclassbook ($book_list, $book_num, "B", "a",NULL, $chglist); ?>
 	  </tr>
 
 	<tr> </tr>
 	<tr>
 		<td rowspan="2" width="" bgcolor="#dddddddd"><center><font size=5><b>(b)</b></font> 17:00 ~ 18:15</center></td>
-    <?php echoclassbook ($book_list, $book_num, "A", "b"); ?>
+    <?php echoclassbook ($book_list, $book_num, "A", "b",NULL, $chglist); ?>
 	</tr>
 	  <tr>
-      <?php echoclassbook ($book_list, $book_num, "B", "b"); ?>
+      <?php echoclassbook ($book_list, $book_num, "B", "b",NULL, $chglist); ?>
 	  </tr>
 
 	<tr> </tr>
 	<tr>
 		<td rowspan="2" width="" bgcolor="#dddddddd"><center><font size=5><b>(c)</b></font> 19:00 ~ 20:15</center></td>
-    <?php echoclassbook ($book_list, $book_num, "A", "c"); ?>
+    <?php echoclassbook ($book_list, $book_num, "A", "c",NULL, $chglist); ?>
 	</tr>
 	  <tr>
-      <?php echoclassbook ($book_list, $book_num, "B", "c"); ?>
+      <?php echoclassbook ($book_list, $book_num, "B", "c",NULL, $chglist); ?>
 	  </tr>
 
 	<tr> </tr>
 	<tr>
 		<td rowspan="2" width="" bgcolor="#dddddddd"><center><font size=5><b>(d)</b></font> 20:30 ~ 21:45</center></td>
-    <?php echoclassbook ($book_list, $book_num, "A", "d"); ?>
+    <?php echoclassbook ($book_list, $book_num, "A", "d",NULL, $chglist); ?>
 	</tr>
 	  <tr>
-      <?php echoclassbook ($book_list, $book_num, "B", "d"); ?>
+      <?php echoclassbook ($book_list, $book_num, "B", "d",NULL, $chglist); ?>
 	  </tr>
 
 </table>

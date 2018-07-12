@@ -608,6 +608,11 @@
 		while ($row = mysqli_fetch_array($result, MYSQLI_ASSOC)) {
 			/*if ($row["str"] >= 0 ) continue;*/
 			$list[$rt] = $row;
+
+      $bid = $row['str'];
+      $list["bid@".$bid] ++;
+      /*echo "bid@".$bid."=".$list["bid@".$bid];*/
+
 			$rt ++;
 		}
 
@@ -905,12 +910,14 @@
 		}
   }
 
-  function echoclassbook ($book_list, $book_num, $studio, $time, $chkonline = 1) {
+  function echoclassbook ($book_list, $book_num, $studio, $time, $chkonline = 1, $chglist) {
 
 	  mapNow2class ($chk_day, $chk_time, 10*60, 0);
 	   /*gmdate("Y/m/d(D) H:i:s", intval($now));*/
 	  /*($chk_time = my_gmdate("d", intval(getnow()))*/
 	  //echo $chk_day.".".$chk_time;
+
+    if ($chkonline == NULL) $chkonline = 1;
 
 	  /*echo $chkonline;*/
 	  for ( $j = 1 ; $j <= 7 ; $j ++) {
@@ -923,14 +930,21 @@
 		    echo "<td width=\"\" bgcolor=\"#aeffce\"><font size=4>";
       }
 		}
+
+
 		for ($i = 0 ; $i < $book_num ; $i ++) {
+
 
 		  if ($book_list[$i]["studio"] == $studio && $book_list[$i]["time"] == $time && $book_list[$i]["day"] == $j) {
 
 			if (($book_list[$i]["online"] == 1 && $chkonline) || !$chkonline) {
+       $bidmrk = "bid@".$book_list[$i]["sn"];
+			 $bidmrk_n = $chglist[$bidmrk];
+
+			  //echo $bidmrk."=".$bidmrk_n;
 			  echo "";
 			  if ($book_list[$i]["online"] == 1) echo "<font color=\"#015902\"><b>";
-			  echo "<i>".$book_list[$i]["teacher"]."</i>";
+			  echo "<i>".$book_list[$i]["teacher"]."</i>"."(".$bidmrk_n .")";
 			  echo "<font size=2><br><a href=\"book_mngr.php?sn=".$book_list[$i]["sn"]."\">";
 			  echo $book_list[$i]["name"];
 			  echo "</a>";
