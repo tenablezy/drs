@@ -106,6 +106,7 @@
 
 	switch ($memtype) {
 			case "VIP": 			$vip = 1;break;
+			case "normal":    $memtype = "一般會員";
 			case "一般會員": 	$vip = 2;break;
 			case "非會員": 		$vip = 3;break;
 			case "姐妹卡": 		$vip = 4;break;
@@ -130,9 +131,10 @@
 		//if (empty($oc)) 			{$checkerror=1; echo "請輸入會員職業<br>";}
 		//if (empty($pc) || empty($pa)) {$checkerror=1; echo "請輸入會員地址<br>";}
 		//if (empty($wc) || empty($wc)) {$checkerror=1; echo "請輸入會員公司/學校名稱<br>";}
-		if (empty($em)) {$checkerror=1; echo "請輸入會員E-Mail<br>";}
+		//if (empty($em)) {$checkerror=1; echo "請輸入會員E-Mail<br>";}
 		//if (empty($tp2)) {$checkerror=1; echo "請輸入會員市話<br>";}
-		if (empty($mp)) {$checkerror=1; echo "請輸入會員電話<br>";}
+		if (empty($mp) || intval($mp) == 0) {$checkerror=1; echo "請輸入會員電話<br>";}
+		if (empty($pp) ) {$checkerror=1; echo "請輸入如何得知LUMI?<br>";}
 		
 		if ($vip == 4) {
 			//if (empty($mid_2)) 			{$checkerror=1; echo "請輸入會員2編號<br>";	}
@@ -312,7 +314,7 @@
 			mysqli_close($link);		
 			
 			if ( empty($result))  echo "新增失敗";
-			echo "新增完成";
+			echo "新增 <a href=\"mview.php?mid=".$mid."\">".$mid."</a> 完成!!";
 			
     }
 	}
@@ -342,9 +344,6 @@
 		</tr>
 	</table>
 <?php if ( $vip != 0 ) { ?>
-<br>
-<br>
-<br>
 	<table cellSpacing="0" cellPadding="4" width="658" align="left" bgColor="<?php echo $sexbgc;?>" border="0" id="table2">
 		<tr>
 			<td bgColor="<?php echo $sexbgc;?>" colSpan="3"><b>
@@ -459,12 +458,14 @@
 			<td colSpan="3"><b><font class="mbody" color="#2c8383"><!--地址∕-->聯絡資料 
 			</font></b><font color="red">（必填）</font></td>
 		</tr>
+		<!--
 		<tr>
 			<td align="right" width="6">　</td>
 			<td noWrap><font class="mbody">聯 絡 信 箱</font></td>
 			<td><input size="51" name="em"> 
 			</td>
 		</tr>
+    -->
 		<tr>
 			<td vAlign="top" align="right" width="6">　</td>
 			<td>行動電 話&nbsp; </td>
@@ -513,11 +514,13 @@
 			<option value="其他">其他</option>
 			</select> </td>
 		</tr>
+		<!--
 		<tr>
 			<td align="right" width="6">　</td>
 			<td noWrap><font class="mbody">公司/學校名稱</font></td>
 			<td><input name="wc" size="50"> </td>
 		</tr>
+    -->
 		<tr>
 			<td align="right" width="6">　</td>
 			<td noWrap><font class="mbody">備      註</font></td>
@@ -525,10 +528,15 @@
 		</tr>
 		<tr>
 			<td align="right" width="6">　</td>
-			<td noWrap><font class="mbody">是否因為網宣報名?</font></td>
+			<!--<td noWrap><font class="mbody">是否因為網宣報名?</font></td>-->
+			<td noWrap><font class="mbody">如何得知LUMI ?</font></td>
 			<td vAlign="top" width="526" height="19">
-			<input type="radio" value="1" name="pp">是 
-			<input type="radio" value="2" name="pp">否
+			<input type="radio" value="1" name="pp">網宣 
+			<input type="radio" value="4" name="pp">親友
+			<input type="radio" value="5" name="pp">社團<br>
+			<input type="radio" value="6" name="pp">路過
+			<input type="radio" value="7" name="pp">其他<br>
+			<input type="radio" value="2" name="pp">非網宣(舊式)
 			<input type="radio" value="3" name="pp">舊會員
 			</td>
 		</tr>

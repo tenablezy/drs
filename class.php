@@ -98,7 +98,21 @@
 
   $book_num = getBook($book_list);
   $selbook_num = getBookByOrder ($selbook_list);
+
+
+    $showclass= _get("showclass");
+    $showlist = _get("showlist");
+
+    if (!isset($showclass)) $showclass=1;
+    if (!isset($showlist))  $showlist=1;
+
 ?>
+
+<?php
+
+  if ( $showclass ==1 ) {
+?>
+
 <p><b><font size="5">課程登記</font> <font size="5" color=blue><b><?php echo my_gmdate("Y/m/d (D) H:i:s", intval($now));?></b></font>
 <hr>
 <form method="post" action="class.php">
@@ -134,8 +148,11 @@
 <p>今日登記人數: <b><font color="#0000FF" size="5"><?php echo $chgcount;?></font></b> 人次</p>
 
 <a href="book_mngr.php">Book Manager</a>  
+
 <!-- class A -->
-<table border="1" width="70%" id="book">
+
+<center>
+<table border="1" width="70%" id="book"  cellspacing=0 cellpadding=0>
 	<tr>
 		<td width="10%" bgcolor="#ccfef6"><center><font color="blue">Studio A</font></center></td>
 		<td rowspan="2" width="13%" bgcolor="#dddddd"><center><font size=5><b>一</b></center></td>
@@ -226,9 +243,32 @@
 
 <!--  <a href="http://www.lumi-dance-school.com/files/schedule/schedule.jpg" target="_blank">Link Schedule</a> -->
 
+<!--
+<table width="100%" border="0" cellspacing=0 cellpadding=0>
+	<tr>
+		<td >
+      <iframe width="100%" height="500" src="class.php?showlist=1"></iframe>
+    </td>
+		<td >
+      <iframe width="100%" height="500" src="class.php?showlist=1"></iframe>
+    </td>
+  </tr>
+</table>
+
+-->
+
+<?php
+
+  }
+?>
+
+<?php
+
+  if ( $showlist ==1 ) {
+?>
 
 <p>上課列表:</p>
-<table border="1" width="70%" id="table1">
+<table border="1" width="100%" id="table1">
 	<tr>
 		<td width="5%">時間</td>
 		<td width="25%">會員編號 <!--<br>(剩餘堂數 at <?php echo $nowdatetime;?>)--></td>
@@ -270,6 +310,10 @@
 	<?php } //mysqli_close($link);	 
 	?>
 </table>
+<?php
+  }
+?>
+</center>
 
 </body>
 

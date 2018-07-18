@@ -436,8 +436,17 @@
 		<td align="right" width="6">　</td>
 			<td noWrap><font class="mbody">是否因為網路宣傳報名?</font></td>
 			<td vAlign="top" width="313" height="19">
+      <!--
 			<input type="radio" value="1" name="pp" <?php if ($mlist[0]["prop"]==1) echo "checked";?>>是 
 			<input type="radio" value="2" name="pp" <?php if ($mlist[0]["prop"]==2) echo "checked";?>>否
+			<input type="radio" value="3" name="pp" <?php if ($mlist[0]["prop"]==3) echo "checked";?>>舊會員</td>
+      -->
+			<input type="radio" value="1" name="pp" <?php if ($mlist[0]["prop"]==1) echo "checked";?>>網宣 
+			<input type="radio" value="4" name="pp" <?php if ($mlist[0]["prop"]==4) echo "checked";?>>親友
+			<input type="radio" value="5" name="pp" <?php if ($mlist[0]["prop"]==5) echo "checked";?>>社團<br>
+			<input type="radio" value="6" name="pp" <?php if ($mlist[0]["prop"]==6) echo "checked";?>>路過
+			<input type="radio" value="7" name="pp" <?php if ($mlist[0]["prop"]==7) echo "checked";?>>其他
+			<input type="radio" value="2" name="pp" <?php if ($mlist[0]["prop"]==2) echo "checked";?>>非網宣(舊式)<br>
 			<input type="radio" value="3" name="pp" <?php if ($mlist[0]["prop"]==3) echo "checked";?>>舊會員</td>
 		</tr>
 		
