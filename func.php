@@ -39,7 +39,7 @@
   } else {
     $BACKUP_PATH = "d:\\systembackup\\";
 	  $MYSQL_DUMP = "C:\wamp64\bin\mysql\mysql5.7.14\bin\mysqldump.exe";
-    $DOWNLOA_PATH = "d:\\systembackup\\"
+    $DOWNLOA_PATH = "d:\\systembackup\\";
   }
 
 

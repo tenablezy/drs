@@ -92,8 +92,8 @@
 		<!--<td width="15%" bgcolor="<?php echo $cc;?>"><?php echo $classuclist[$i]["name"];?></td>-->
 		<td width="15%" bgcolor="<?php echo $cc;?>"><?php echo $birth["mon"]."/".$birth["mday"];?> </td>
 		<td width="15%" bgcolor="<?php echo $cc;?>">
-    <?php echo $classuclist[$i]["max_mstart_mon"];?>€ë
-		<?php echo $classuclist[$i]["max_mstart_day"];?>€é
+    <?php echo $classuclist[$i]["max_mstart_mon"];?>月
+		<?php echo $classuclist[$i]["max_mstart_day"];?>日
 		(<?php echo gmdate("Y/m/d", intval($classuclist[$i]["mstart"]));?>)
     </td>
 	</tr>
