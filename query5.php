@@ -46,30 +46,19 @@
 <head>
 <?php
 	CCS_jq_head ();
-	$the["A"] =0;
-	$the["B"] =0;
-	$the["delete"] =0;
-	$book_num = getBook($book_list);
+
+  /* SELECT `mid`,MIN(`time`) FROM `change` GROUP BY `mid` HAVING MIN(`time`) BETWEEN 1530403200 AND 1532217600 ORDER BY MIN(`time`) DESC */
+  $sel = "*";
+  $rule = "OR (`mid` LIKE '%' AND `time` >= $stime AND `time` <= $etime ) ";
+  $maxlist1 = QueryChanges ($chglist1, "*", $sel, $rule);
+  echo "maxlist1=".$maxlist1;
 	
-	if($AOrB != "A" && $AOrB != "B")
-		$AOrB = "A";
-	for($i=0, $t = 0; $i<$book_num; $i++){
-		if($book_list[$i]["studio"] =="A"){
-			$the["A"]++;
-		}else if($book_list[$i]["studio"] =="B"){
-			$the["B"]++;
-		}else{
-			$the["delete"]++;
-		}
-		$teacherList[$t++] = $book_list[$i]["teacher"];
-		$teacherList[$book_list[$i]["teacher"]] = 1;
-	}
-	for($i =0, $teacherNum =0; $i < $t; $i++){
-		if($teacherList[$teacherList[$i]] == 1){
-			$trueTeacherList[$teacherNum++] = $teacherList[$i];
-			$teacherList[$teacherList[$i]]++;
-		}
-	}
+  /* SELECT `mid`,MIN(`time`) FROM `change` GROUP BY `mid` HAVING MIN(`time`) BETWEEN 1530403200 AND 1532217600 ORDER BY MIN(`time`) DESC */
+  $sel = "`mid`,MIN(`time`)";
+  $rule = "OR (`mid` LIKE '%') GROUP BY `mid` HAVING MIN(`time`) BETWEEN $stime AND $etime ";
+  $order = "MIN(`time`) DESC";
+  $maxlist2 = QueryChanges ($chglist2, "*", $sel, $rule, $order);
+  echo "maxlist2=".$maxlist2;
 	
 ?>
 
@@ -81,7 +70,7 @@
 
 <body >
 
-<form method="post" action="query4.php">
+<form method="post" action="query5.php">
 	<br>Start: 
   <script> $(function() { $( "#stime_str" ).datepicker({dateFormat: 'yy/mm/dd'}); }); </script>
   <input type="text" name="stime_str" id="stime_str" size="20" value="<?php echo $stime_str; ?>">
@@ -90,6 +79,7 @@
   <script> $(function() { $( "#etime_str" ).datepicker({dateFormat: 'yy/mm/dd'}); }); </script>
   <input type="text" name="etime_str" id="etime_str" size="20" value="<?php echo $etime_str; ?>">
 	
+  <!--
 	Teacher:
 	<input type="text" name="teacher" id="teacher" size="20" value="<?php echo $teacher; ?>">
 	Part: 
@@ -98,206 +88,13 @@
 	    <option value="<?php echo  7*24*60*60;?>"   <?php if ($part == 7*24*60*60) echo "selected";?> >1 Week</option>
 	    <option value="<?php echo 30*24*60*60;?>"   <?php if ($part == 30*24*60*60) echo "selected";?> >1 Month</option>
 	</select>
+  -->
 	<input type="submit" value="send" name="query" id="query">
 
   <br>
   <br>
 <table  border="1" id="table1">
 	<tr>
-		<td width = "300px">Time</td>
-<?php
-	for($j = 0, $c = 0; $j < $book_num; $j++){
-		if($book_list[$j]["teacher"] == $teacher &&  $book_list[$j]["online"] == 1){
-			if(($c++)%2){
-?>
-				<td  width = "150px" bgcolor = #FFFFCC>
-				<?php echo $book_list[$j]["teacher"]; ?><br>
-				<?php echo $book_list[$j]["name"]; ?><br>
-				<?php echo $book_list[$j]["sub_name"]; ?><br>
-				</td>
-<?php
-			}else{
-?>
-				<td width = "150px" bgcolor = #CCFF99>
-				<?php echo $book_list[$j]["teacher"]; ?><br>
-				<?php echo $book_list[$j]["name"]; ?><br>
-				<?php echo $book_list[$j]["sub_name"]; ?><br>
-				</td>
-<?php
-			}
-		}
-	}
-?>
-		<td width = "150px">Count</td>
-	</tr>
-
-<?php 
-	
-	$today = $stime;
-	$etoday = $today;
-
-	$count = 0;
-	
-	$countRow;
-	$countBoy;
-	$countGirl;
-	$countMenber;
-	$countNoMenb;
-	
-	$totalBoy;
-	$totalGirl;
-	$totalMenber;
-	$totalNoMenb;
-	
-	$countTotal["A"] = 0;
-	$countTotal["B"] = 0;
-	for($i =0; $i < $book_num; $i++){
-		$countTotal[$book_list[$i]["sn"]] =0;
-		$totalBoy[$book_list[$i]["sn"]] =0;
-		$totalGirl[$book_list[$i]["sn"]] =0;
-		$totalMember[$book_list[$i]["sn"]] =0;
-		$totalNoMemb[$book_list[$i]["sn"]] =0;
-	}
-	
-	if ( ($etime - $stime ) > $part ) $p = $part;
-	else $p = $etime - $stime;
-
-	while(1) {///////////////////////////////////
-
-		$etoday += $p;
-
-		$chgcount = QueryRegByTime($chglist, $today, $p ); 
-		$timeStr = my_gmdate("Y/m/d (D)", intval($today));
-
-		if ( $p > 24 * 60 * 60 ) {
-		$timeStr .= " ~ ";
-		$timeStr .= my_gmdate("Y/m/d (D)", intval($etoday) - 60);
-		}
-		//
-		$countRow["A"] = 0;
-		$countRow["B"] = 0;
-		for($i =0; $i <$book_num; $i++){
-			$countRow[$book_list[$i]["sn"]]  	= 0;
-			$countBoy[$book_list[$i]["sn"]]  	= 0;
-			$countGirl[$book_list[$i]["sn"]]	= 0;
-			$countMember[$book_list[$i]["sn"]]	= 0;
-			$countNoMemb[$book_list[$i]["sn"]]  = 0;
-		}
-
-		//計算性別、會員
-		///////////////////////////////////////////////////////////////////////////////////////////
-		for($i =0; $i <$chgcount; $i++){
-			$countRow[$chglist[$i]["sn"]]++;
-			if($chglist[$i]["sex"] == 1){
-				$countBoy[$chglist[$i]["sn"]]++;
-			}else{
-				$countGirl[$chglist[$i]["sn"]]++;
-			}
-			if($chglist[$i]["admin"] == 3){
-				$countNoMemb[$chglist[$i]["sn"]]++;
-			}else{
-				$countMember[$chglist[$i]["sn"]]++;
-			}
-		}
-		//////////////////////////////////////////////////////////////////////////////////////////
-?>
-	<tr>
-		<td> <?php echo $timeStr; ?>
-			<a href="class.php?now=<?php echo $today;?>"> </a>  </td>
-<?php		
-		for($i =0, $c =0; $i <$book_num; $i++){
-			if($book_list[$i]["teacher"] == $teacher && $book_list[$i]["online"] ==1 ){
-				if(($c++)%2){
-?>
-					<td bgcolor = #FFFFCC>男生: <?php shownumber($countBoy[$book_list[$i]["sn"]]); ?>人<br>
-					女生: <?php shownumber($countGirl[$book_list[$i]["sn"]]); ?>人<br>
-					會員: <?php shownumber($countMember[$book_list[$i]["sn"]]); ?>人<br>
-					非會員: <?php shownumber($countNoMemb[$book_list[$i]["sn"]]); ?>人<br>
-					</td>
-<?php
-				}else{
-?>
-					<td bgcolor = #CCFF99>男生: <?php shownumber($countBoy[$book_list[$i]["sn"]]); ?>人<br>
-					女生: <?php  shownumber($countGirl[$book_list[$i]["sn"]]); ?>人<br>
-					會員: <?php  shownumber($countMember[$book_list[$i]["sn"]]); ?>人<br>
-					非會員: <?php  shownumber($countNoMemb[$book_list[$i]["sn"]]); ?>人<br>
-					</td>
-<?php
-				}
-				$countRow[$AOrB] += $countRow[$book_list[$i]["sn"]];
-				$countTotal[$book_list[$i]["sn"]] 	+= $countRow[$book_list[$i]["sn"]];
-				$totalBoy[$book_list[$i]["sn"]] 	+= $countBoy[$book_list[$i]["sn"]];
-				$totalGirl[$book_list[$i]["sn"]] 	+= $countGirl[$book_list[$i]["sn"]];
-				$totalMember[$book_list[$i]["sn"]] 	+= $countMember[$book_list[$i]["sn"]];
-				$totalNoMemb[$book_list[$i]["sn"]] 	+= $countNoMemb[$book_list[$i]["sn"]];
-			}
-		}
-
-  /************* writing data ************************/
-
-
-
-
-
-
-?>
-		<td><?php shownumber($countRow[$AOrB]); ?></td>
-	</tr>
-<?php
-		$countTotal["A"] += $countRow["A"];
-		$countTotal["B"] += $countRow["B"];
-		$today = $etoday;
-		$count++;
-		if ( $today >= $etime ) break;
-		if ( $today + $part <= $etime) $p = $part;
-		else $p  = ($etime - $etoday);
-
-	}///////////////////////////
-
-?>
-<tr>
-		<td> 統計 </td>
-<?php
-	for($j = 0, $c = 0; $j < $book_num; $j++){
-		if($book_list[$j]["teacher"] == $teacher && $book_list[$j]["online"] == 1){
-			if(($c++)%2){
-?>
-				<td bgcolor = #FFFFCC>
-				總人數: 	<?php echo $countTotal[$book_list[$j]["sn"]]; ?>人<br>
-<!--				平均: 		<?php echo round($countTotal[$book_list[$j]["sn"]]/$count, 2); ?>人<br>-->
-				男女比: 	<?php echo $totalBoy[$book_list[$j]["sn"]];
-								  echo " : ";
-								  echo $totalGirl[$book_list[$j]["sn"]]; 
-							?><br>
-				會員比例: 	<?php 
-				if($countTotal[$book_list[$j]["sn"]]==0){
-					echo $countTotal[$book_list[$j]["sn"]];
-				}else{
-					echo round($totalMember[$book_list[$j]["sn"]]/$countTotal[$book_list[$j]["sn"]], 2); 
-				}?><br>
-				</td>
-<?php
-			}else{
-?>
-				<td bgcolor = #CCFF99>
-				總人數: 	<?php echo $countTotal[$book_list[$j]["sn"]]; ?>人<br>
-				<!--平均: 		<?php echo round($countTotal[$book_list[$j]["sn"]]/$count, 2); ?>人<br>-->
-				男女比: 	<?php echo $totalBoy[$book_list[$j]["sn"]];
-								  echo " : ";
-								  echo $totalGirl[$book_list[$j]["sn"]]; 
-							?><br>
-				會員比例: 	<?php 
-							if($countTotal[$book_list[$j]["sn"]]==0){
-								echo $countTotal[$book_list[$j]["sn"]];
-							}else{
-								echo round($totalMember[$book_list[$j]["sn"]]/$countTotal[$book_list[$j]["sn"]], 2); 
-							}?><br>
-				</td>
-<?php
-			}
-		}
-	}
-?>
 		<td><?php echo round($countTotal[$AOrB]/$count, 2); ?>	</td>
 </tr>
 

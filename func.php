@@ -593,12 +593,13 @@
 	}
 	
 	
-	function QueryChanges (&$list, $mid) {
+	function QueryChanges (&$list, $mid, $sel="*", $rule = "", $order="`time` DESC") {
 	
 		global $MAX_PAGE;
 		$link = openmysql();
 		
-		$query = "SELECT * FROM `change` WHERE `mid` = '$mid' ORDER BY `time` DESC";
+		$query = "SELECT $sel FROM `change` WHERE `mid` = '$mid' $rule ORDER BY $order";
+    //echo $query;
 		$result = mysqli_statment($link,$query);
 		
 		$rt = 0;
