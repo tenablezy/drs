@@ -19,6 +19,7 @@
 	$renew  =_get("renew");
 	$delete =_get("delete");
 	$passwd=_get("passwd");
+	$mstart_org=_get("mstart_org");
 
   if (empty($mid) && !empty($qmid)) {
     $mid = $qmid;
@@ -113,10 +114,10 @@
 		if (empty($vip)) 		{echo "請選擇會員類型";	exit(1);}
 		if (empty($mid)) 		{echo "請輸入會員編號";	exit(1);}
 		if (empty($name)) 		{echo "請輸入會員姓名";	exit(1);}
-		if (empty($nickname)) 	{echo "請輸入會員暱稱";	exit(1);}
+		//if (empty($nickname)) 	{echo "請輸入會員暱稱";	exit(1);}
 		if (empty($sex)) 		{echo "請輸入會員性別";	exit(1);}
 		if (empty($by) || empty($bm) ||empty($bd) ) 		{echo "請輸入會員生日";	exit(1);}
-		if (empty($id))			{echo "請輸入會員身分證字號";	exit(1);}
+		//if (empty($id))			{echo "請輸入會員身分證字號";	exit(1);}
 		if (empty($oc)) 		{echo "請輸入會員職業";	exit(1);}
 
 		$mid = ltrim($mid);
@@ -128,6 +129,7 @@
 		//echo $by.$bm.$bd."<br>";
 		$birth = my_strtotime($by."/".$bm."/".$bd);
 		$mstart = my_strtotime($msy."/".$msm."/".$msd);
+    if ( empty($mstart_org)) $mstart_org = $mstart;
 		//echo $native."<br>";
 		//echo $id."<br>";
 		//echo $oc."<br>";	
@@ -203,9 +205,16 @@
       else UpdateMemberStartTime($mid, $mstart);
 			
 		} else {
-        UpdateChangeStartTime ($mid, $mstart);
+        if ($mstart_org != $mstart) {
+          UpdateChangeStartTime ($mid, $mstart);
+        } else {
+            /* no change on mstart */
+        }
     }
 		
+    //echo "org=".$mstart_org.",new=".$mstart;
+    $mstart_org = $mstart;
+    //echo "org=".$mstart_org.",new=".$mstart;
 						
 		if ( empty($result))  {echo "修改失敗";exit(1);}
 		$link = openmysql();
@@ -270,6 +279,7 @@
 
 <input type="hidden" value="" name="qmid">
 <input type="hidden" value="<?php echo $mid;?>" name="mid">
+<input type="hidden" value="<?php echo $mstart_org;?>" name="mstart_org">
 	<table cellSpacing="0" cellPadding="4" width="658" bgColor="<?php echo $sexbgc;?>" border="0" id="table2">
 		<tr>
 			<td bgColor="#f5f09a" colSpan="4"><b>

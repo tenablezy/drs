@@ -1,6 +1,8 @@
 <?php
 	require ("version.php");
 
+  $isTEST = 0;
+
 	$mysqli_host = "localhost";
 	$mysqli_user = "root";
 	$mysqli_password = "1234";
@@ -8,6 +10,7 @@
 	
 	$MAX_PAGE = 100;
 	$MAX_RES_QUOTA = 2;
+
 	$QUOTA_PASS = "lds168";
 	$MODIFY_PASS = "lds168";
 
@@ -33,9 +36,14 @@
 
 	function getNow()
 	{
-	global $TIME_OFFSET;
-	return 1531330762+3*60*24+8*60+1*60*60+35*60 - 7*24*60*60;
-	return time() + $TIME_OFFSET;
+	  global $TIME_OFFSET;
+	  global $isTEST;
+
+    if ($isTEST) {
+	    return 1531330762+3*60*24+8*60+1*60*60+35*60 - 7*24*60*60;
+    } else {
+	    return time() + $TIME_OFFSET;
+    }
 
 		return time() + 8 * 60 * 60;
 	$today = getdate();
@@ -329,6 +337,8 @@
 	
   function UpdateChangeStartTime ($mid, $mstart) {
 			global $TYPE_MEMB_START;
+
+      if (0) {
 			$link = openmysql();
 			$now = getNow();
 			$query = $mstart;
@@ -337,8 +347,10 @@
 			//echo $query2;
 			$result = mysqli_statment($link,$query2) or die ("Invalid query");
 			/*echo "起始日修改 type=2";*/
+      }
 
-			if (!mysqli_affected_rows($link)) {
+			//if (!mysqli_affected_rows($link)) {
+      if (1) {
 				$link = openmysql();
 				$now = getNow();
 				$query = $mstart;
