@@ -1,6 +1,15 @@
 <?php
+
 	require ("func.php");
 	
+    function shownumber ( $num) {
+        if ( $num > 0 ) {
+            echo "<font color=\"red\">$num</font>";
+        } else {
+            echo $num;
+        }
+    }
+
 	$now = getNow();
 
   $part      = _get("part");
@@ -200,22 +209,23 @@
 		<td> <?php echo $timeStr; ?>
 			<a href="class.php?now=<?php echo $today;?>"> </a>  </td>
 <?php		
+
 		for($i =0, $c =0; $i <$book_num; $i++){
 			if($book_list[$i]["studio"] == $AOrB ){
 				if(($c++)%2){
 ?>
-					<td bgcolor = #FFFFCC>男生: <?php echo $countBoy[$book_list[$i]["sn"]]; ?>人<br>
-					女生: <?php echo $countGirl[$book_list[$i]["sn"]]; ?>人<br>
-					會員: <?php echo $countMember[$book_list[$i]["sn"]]; ?>人<br>
-					非會員: <?php echo $countNoMemb[$book_list[$i]["sn"]]; ?>人<br>
+					<td bgcolor = #FFFFCC>男生: <?php shownumber($countBoy[$book_list[$i]["sn"]]); ?>人<br>
+					女生: <?php shownumber($countGirl[$book_list[$i]["sn"]]); ?>人<br>
+					會員: <?php shownumber($countMember[$book_list[$i]["sn"]]); ?>人<br>
+					非會員: <?php shownumber($countNoMemb[$book_list[$i]["sn"]]); ?>人<br>
 					</td>
 <?php
 				}else{
 ?>
-					<td bgcolor = #CCFF99>男生: <?php echo $countBoy[$book_list[$i]["sn"]]; ?>人<br>
-					女生: <?php echo $countGirl[$book_list[$i]["sn"]]; ?>人<br>
-					會員: <?php echo $countMember[$book_list[$i]["sn"]]; ?>人<br>
-					非會員: <?php echo $countNoMemb[$book_list[$i]["sn"]]; ?>人<br>
+					<td bgcolor = #CCFF99>男生: <?php shownumber($countBoy[$book_list[$i]["sn"]]); ?>人<br>
+					女生: <?php  shownumber($countGirl[$book_list[$i]["sn"]]); ?>人<br>
+					會員: <?php  shownumber($countMember[$book_list[$i]["sn"]]); ?>人<br>
+					非會員: <?php  shownumber($countNoMemb[$book_list[$i]["sn"]]); ?>人<br>
 					</td>
 <?php
 				}
@@ -228,7 +238,7 @@
 			}
 		}
 ?>
-		<td><?php echo $countRow[$AOrB]; ?></td>
+		<td><?php shownumber($countRow[$AOrB]); ?></td>
 	</tr>
 <?php
 		$countTotal["A"] += $countRow["A"];

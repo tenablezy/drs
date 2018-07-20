@@ -1,7 +1,13 @@
 <?php
 	require ("version.php");
 
+  /**************************************************/
+  /**** change it before released *******************/
+
   $isTEST = 0;
+  $isLinux = 1;
+
+  /**************************************************/
 
 	$mysqli_host = "localhost";
 	$mysqli_user = "root";
@@ -25,14 +31,17 @@
 	
 	error_reporting(0);
 
-  if (1) {
-    $BACKUP_PATH = "d:\\systembackup\\";
-	$MYSQL_DUMP = "C:\wamp64\bin\mysql\mysql5.7.14\bin\mysqldump.exe";
-
-  } else {
+  if (isLinux) {
     $BACKUP_PATH = "/home/nick/public_html/backup/";
     $MYSQL_DUMP = "mysqldump";
+    $DOWNLOA_PATH = "/home/nick/public_html/backup/";
+
+  } else {
+    $BACKUP_PATH = "d:\\systembackup\\";
+	  $MYSQL_DUMP = "C:\wamp64\bin\mysql\mysql5.7.14\bin\mysqldump.exe";
+    $DOWNLOA_PATH = "d:\\systembackup\\"
   }
+
 
 	function getNow()
 	{

@@ -1,8 +1,8 @@
 <html>
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=big5">
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 <META http-equiv="Content-Script-Type" content="type">
-<?php header('Content-type: text/html; charset=big5'); ?>
+<?php header('Content-type: text/html; charset=utf-8'); ?>
 </head>
 <body>
 
