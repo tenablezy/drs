@@ -17,6 +17,7 @@
   $query     = _get("query");
   $AOrB      = _get("AOrB");
   $teacher   = _get("teacher"); 
+  $methd     = _get("methd"); 
   if (empty($stime_str)) $stime = $now;
   else                   $stime = my_strtotime($stime_str);
   if (empty($etime_str)) $etime = $now;
@@ -24,6 +25,7 @@
 
   if (empty($part))      $part  = 24*60*60;
 
+  echo $methd;
   //echo "<br>1 ".$stime_str." ".my_strtotime($stime_str);
   //echo "<br>2 ".$etime_str." ".my_strtotime($etime_str);
   /*
@@ -47,18 +49,23 @@
 <?php
 	CCS_jq_head ();
 
-  /* SELECT `mid`,MIN(`time`) FROM `change` GROUP BY `mid` HAVING MIN(`time`) BETWEEN 1530403200 AND 1532217600 ORDER BY MIN(`time`) DESC */
-  $sel = "*";
-  $rule = "OR (`mid` LIKE '%' AND `time` >= $stime AND `time` <= $etime ) ";
-  $maxlist1 = QueryChanges ($chglist1, "*", $sel, $rule);
-  echo "maxlist1=".$maxlist1;
+  if ( $methd == "Report") {
+      /* SELECT `mid`,MIN(`time`) FROM `change` GROUP BY `mid` HAVING MIN(`time`) BETWEEN 1530403200 AND 1532217600 ORDER BY MIN(`time`) DESC */
+      $sel = "*";
+      $rule = "OR (`mid` LIKE '%' AND `time` >= $stime AND `time` <= $etime ) ";
+      $maxlist1 = QueryChanges ($chglist1, "*", $sel, $rule);
+      echo "maxlist1=".$maxlist1;
+  }
 	
-  /* SELECT `mid`,MIN(`time`) FROM `change` GROUP BY `mid` HAVING MIN(`time`) BETWEEN 1530403200 AND 1532217600 ORDER BY MIN(`time`) DESC */
-  $sel = "`mid`,MIN(`time`)";
-  $rule = "OR (`mid` LIKE '%') GROUP BY `mid` HAVING MIN(`time`) BETWEEN $stime AND $etime ";
-  $order = "MIN(`time`) DESC";
-  $maxlist2 = QueryChanges ($chglist2, "*", $sel, $rule, $order);
-  echo "maxlist2=".$maxlist2;
+
+  if ( $methd == "NewAdd") {
+    /* SELECT `mid`,MIN(`time`) FROM `change` GROUP BY `mid` HAVING MIN(`time`) BETWEEN 1530403200 AND 1532217600 ORDER BY MIN(`time`) DESC */
+    $sel = "`mid`,MIN(`time`)";
+    $rule = "OR (`mid` LIKE '%') GROUP BY `mid` HAVING MIN(`time`) BETWEEN $stime AND $etime ";
+    $order = "MIN(`time`) DESC";
+    $maxlist1 = QueryChanges ($chglist1, "*", $sel, $rule, $order);
+    echo "maxlist2=".$maxlist1;
+  }
 	
 ?>
 
@@ -79,6 +86,10 @@
   <script> $(function() { $( "#etime_str" ).datepicker({dateFormat: 'yy/mm/dd'}); }); </script>
   <input type="text" name="etime_str" id="etime_str" size="20" value="<?php echo $etime_str; ?>">
 	
+	<select size="1" name="methd">
+	    <option value="Report"   <?php if ($methd == "Report") echo "selected";?> >會員紀錄</option>
+	    <option value="NewAdd"   <?php if ($methd == "NewAdd") echo "selected";?> >新會員</option>
+	</select>
   <!--
 	Teacher:
 	<input type="text" name="teacher" id="teacher" size="20" value="<?php echo $teacher; ?>">
@@ -95,10 +106,78 @@
   <br>
 <table  border="1" id="table1">
 	<tr>
-		<td><?php echo round($countTotal[$AOrB]/$count, 2); ?>	</td>
-</tr>
+		<td>MID</td>
+		<td>Date</td>
+		<td>Changes</td>
+		<td>Notes</td>
+  </tr>
+<?php
+  for ( $i = 0 ; $i < $maxlist1 ; $i ++) {
+    if ($methd == "Report" ) {
+      if ( $chglist1[$i]["type"] == 0 && strstr($chglist1[$i]["str"], "Remove Quota ") == 0) continue;
+    } /* report */
+?>
+  <tr>
+    <td>
+<?php
+    echo "<a href=\"mview.php?mid=".$chglist1[$i]["mid"]."\">".$chglist1[$i]["mid"]."</a>";
+?>
+    </td>
 
+    <td>
+<?php
+    if ($methd == "Report" ) {
+		    echo gmdate("Y/m/d H:i:s",intval($chglist1[$i]["time"]));
+    }
+    if ($methd == "NewAdd" ) {
+	      echo gmdate("Y/m/d H:i:s",intval($chglist1[$i]["MIN(`time`)"]));
+    }
+?>
+    </td>
+
+    <td>
+<?php
+							/*echo $chglist1[$i]["type"];*/
+							switch($chglist1[$i]["type"])
+							{
+								case "0": echo "Remove Quota";break;
+								case "1": echo "課堂";break;
+								case "2": echo "點數";break;
+								case "5": 
+                    $b_studio= $b_teacher= $b_day= $b_time= $b_name= $b_sub_name=$b_comment=$b_online = "";
+					  findbook($chglist1[$i]["str"], $b_studio, $b_teacher, $b_day, $b_time, $b_name, $b_sub_name, $b_comment, $b_online);  
+                      echo "上課";
+                      break;
+									case "99": echo "會員起始時間"; break;
+						}
+							
+?>
+    </td>
+
+    <td>
+<?php
+							/*echo $chglist1[$i]["type"];*/
+							switch($chglist1[$i]["type"])
+							{
+								case "0": echo $chglist1[$i]["str"];break;
+								case "1": echo $chglist1[$i]["str"];break;
+								case "2": echo $chglist1[$i]["str"];break;
+								case "5": 
+                    $b_studio= $b_teacher= $b_day= $b_time= $b_name= $b_sub_name=$b_comment=$b_online = "";
+					  findbook($chglist1[$i]["str"], $b_studio, $b_teacher, $b_day, $b_time, $b_name, $b_sub_name, $b_comment, $b_online);  
+                      echo $b_name."(".$b_teacher.")";
+                      break;
+									case "99": echo gmdate("Y/m/d (D) H:i:s", intval($chglist1[$i]["str"])); break;
+						}
+							
+?>
+    </td>
+  </tr>
+<?php
+  }
+?>
 </table>
+
 </form>
 </body>
 
