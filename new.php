@@ -320,7 +320,7 @@
 	}
 
         if ($admin == 1) $sexbgc="#FFFF00" ;
-        else if ($admin == 2) $sexbgc="#FFAAFF";
+        else if ($admin == 2) $sexbgc="#FFC2FF";
         else if ($admin == 3) $sexbgc="#CCFFFF";
         else $sexbgc="#DDDDDD";
 
@@ -337,8 +337,8 @@
 			<td width="526">
 			<!-- <input type="submit" value="VIP" name="memtype" > -->
 			<input type="submit" value="一般會員" name="memtype">
-			<input type="submit" value="非會員" name="memtype">
-			| <input type="submit" value="姐妹卡" name="memtype" >
+			<!-- <input type="submit" value="非會員" name="memtype">
+			| <input type="submit" value="姐妹卡" name="memtype" > -->
 			</td>			
 			
 		</tr>
@@ -347,7 +347,7 @@
 	<table cellSpacing="0" cellPadding="4" width="658" align="left" bgColor="<?php echo $sexbgc;?>" border="0" id="table2">
 		<tr>
 			<td bgColor="<?php echo $sexbgc;?>" colSpan="3"><b>
-			<font class="mbody" color="#2c8383">個 人 資 料</font></b><font color="red">（必填）</font></td>
+			<font class="mbody" color="#2c8383">個 人 資 料</font></b><font color="red"></font></td>
 		</tr>
 		<tr>
 				<td align="right" width="6">　</td>
@@ -456,7 +456,7 @@
 		-->
 		<tr bgColor="#f5f09a">
 			<td colSpan="3"><b><font class="mbody" color="#2c8383"><!--地址∕-->聯絡資料 
-			</font></b><font color="red">（必填）</font></td>
+			</font></b><font color="red"></font></td>
 		</tr>
 		<!--
 		<tr>
@@ -531,13 +531,15 @@
 			<!--<td noWrap><font class="mbody">是否因為網宣報名?</font></td>-->
 			<td noWrap><font class="mbody">如何得知LUMI ?</font></td>
 			<td vAlign="top" width="526" height="19">
-			<input type="radio" value="1" name="pp">網宣 
+			<input type="radio" value="1" name="pp">網路
 			<input type="radio" value="4" name="pp">親友
 			<input type="radio" value="5" name="pp">社團<br>
 			<input type="radio" value="6" name="pp">路過
 			<input type="radio" value="7" name="pp">其他<br>
+      <!--
 			<input type="radio" value="2" name="pp">非網宣(舊式)
 			<input type="radio" value="3" name="pp">舊會員
+      -->
 			</td>
 		</tr>
 <?php if ($sister)	{ ?>

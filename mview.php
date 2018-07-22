@@ -120,6 +120,9 @@
 		//if (empty($id))			{echo "請輸入會員身分證字號";	exit(1);}
 		if (empty($oc)) 		{echo "請輸入會員職業";	exit(1);}
 
+    /* put reset value */
+    if (empty($id))  { $id = "";}
+
 		$mid = ltrim($mid);
 		$admin = $vip;
 		//echo $mid."<br>";
@@ -152,13 +155,22 @@
 		$prop = $pp;
 		
 		$link = openmysql();
+    /*
 		$query = "UPDATE `dancer2`.`user` ".
 			"SET `name` = '$name', `nickname` = '$nickname', `id`='$id', `sex`='$sex', ".
 			"`birth` = '$birth', `cell`='$cell', `numberh`='$numberh', `numberc`='$numberc', ".
 			"`email` = '$email', `addr`='$addr', `depart`='$depart', `what`='$what', `admin`= '$admin', `remark`= '$remark', `prop`= '$pp'". 
 			" WHERE `user`.`mid` ='$mid' LIMIT 1";
+    */
+
+		$query = "UPDATE `dancer2`.`user` ".
+			"SET `name` = '$name', `sex`='$sex', ".
+			"`birth` = '$birth', `cell`='$cell', ".
+			"`what`='$what', `admin`= '$admin', `remark`= '$remark', `prop`= '$pp'". 
+			" WHERE `user`.`mid` ='$mid' LIMIT 1";
+
 		//echo $query;
-		$result = mysqli_statment($link,$query);
+		$result = mysqli_statment($link,$query) or die ("修改失敗". $query);
 		$queryc = $query;
 		mysqli_close($link);		
 
@@ -169,7 +181,7 @@
 		$query = mysqli_real_escape_string($link, $queryc);
 		$query2 = "INSERT INTO `change` (`mid`, `time`,`type`,`str`) VALUES ('$mid', '$now', '0', '$query')";
 		//echo $query2;
-		$result = mysqli_statment($link,$query2);		
+		//$result = mysqli_statment($link,$query2);		
 		
 		if (0 && QueryMemberStartTime ($mid) == "") {
 			$link = openmysql();
@@ -222,7 +234,7 @@
 		$query = mysqli_real_escape_string($link, $query2);
 		$query2 = "INSERT INTO `change` (`mid`, `time`,`type`,`str`) VALUES ('$mid', '$now', '0', '$query')";
 		//echo $query2;
-		$result = mysqli_statment($link,$query2);
+		$result = mysqli_statment($link,$query2) or die ("修改失敗: ".$query2);
 
 
 		mysqli_close($link);			
@@ -255,7 +267,7 @@
 	
 	
 	if ($mlist[0]["admin"] == 1) $sexbgc="#FFFF00" ;
-	else if ($mlist[0]["admin"] == 2) $sexbgc="#FFAAFF";
+	else if ($mlist[0]["admin"] == 2) $sexbgc="#FFC2FF";
 	else if ($mlist[0]["admin"] == 3) $sexbgc="#CCFFFF";
 
 	$chgcount = QueryChanges($chglist, $mid);
@@ -283,7 +295,7 @@
 	<table cellSpacing="0" cellPadding="4" width="658" bgColor="<?php echo $sexbgc;?>" border="0" id="table2">
 		<tr>
 			<td bgColor="#f5f09a" colSpan="4"><b>
-			<font class="mbody" color="#2c8383">個 人 資 料</font></b><font color="red">（必填）</font></td>
+			<font class="mbody" color="#2c8383">個 人 資 料</font></b><font color="red"></font></td>
 		</tr>
 		<tr>
 			<td align="right" width="6">　</td>
@@ -334,10 +346,10 @@
 		<tr>
 			<td align="right" width="6">　</td>
 			<td noWrap><font class="mbody">會員起始日</font></td>
-			<td>西 元 <input maxLength="4" size="4" name="msy" value="<?php echo $mstart["year"];?>"> 年 
-			<input maxLength="4" size="4" name="msm" value="<?php echo $mstart["mon"];?>">
+			<td>西 元 <input maxLength="4" size="1" name="msy" value="<?php echo $mstart["year"];?>"> 年 
+			<input maxLength="4" size="1" name="msm" value="<?php echo $mstart["mon"];?>">
 			</select> 月
-			<input maxLength="4" size="4" name="msd" value="<?php echo $mstart["mday"];?>">
+			<input maxLength="4" size="1" name="msd" value="<?php echo $mstart["mday"];?>">
 			</select> 日</td>
 		</tr>			
 		<tr>
@@ -345,11 +357,13 @@
 			<td noWrap width="102"><font class="mbody">姓　　　名</font></td>
 			<td width="313"><input name="name" size="21"  value="<?php echo $mlist[0]["name"];?>"></td>
 		</tr>
+    <!--
 		<tr>
 			<td align="right" width="6">　</td>
 			<td noWrap><font class="mbody">暱　　　稱</font></td>
 			<td><input name="nickname" size="30"  value="<?php echo $mlist[0]["nickname"];?>"> </td>
 		</tr>
+    -->
 		<tr>
 			<td align="right" width="6">　</td>
 			<td noWrap><font class="mbody">性　　　別</font></td>
@@ -360,12 +374,13 @@
 		<tr>
 			<td align="right" width="6">　</td>
 			<td noWrap><font class="mbody">生　　　日</font></td>
-			<td>西 元 <input maxLength="4" size="4" name="by" value="<?php echo $birth["year"];?>"> 年 
-			<input maxLength="4" size="4" name="bm" value="<?php echo $birth["mon"];?>">
+			<td>西 元 <input maxLength="4" size="1" name="by" value="<?php echo $birth["year"];?>"> 年 
+			<input maxLength="4" size="1" name="bm" value="<?php echo $birth["mon"];?>">
 			</select> 月
-			<input maxLength="4" size="4" name="bd" value="<?php echo $birth["mday"];?>">
+			<input maxLength="4" size="1" name="bd" value="<?php echo $birth["mday"];?>">
 			</select> 日</td>
 		</tr>
+    <!--
 		<tr>
 			<td align="right" width="6">　</td>
 			<td noWrap><font class="mbody">身 分 證 字 號</font></td>
@@ -373,6 +388,7 @@
 			 
 			<input name="id" size="26" value="<?php echo $mlist[0]["id"];?>"></td>
 		</tr>
+    -->
 		<tr>
 			<td vAlign="top" colSpan="4">
 			------------------------------------------------------------------------------------------------------------</td>
@@ -405,6 +421,7 @@
 			<option value="其他" <?php if ($mlist[0]["what"] =="其他") echo "selected";?>>其他</option>
 			</select> </td>
 		</tr>
+    <!--
 		<tr>
 			<td align="right" width="6">　</td>
 			<td noWrap><font class="mbody">公司/學校名稱</font></td>
@@ -412,7 +429,7 @@
 		</tr>
 		<tr bgColor="#f5f09a">
 			<td colSpan="4"><b><font class="mbody" color="#2c8383">地址∕聯絡資料 
-			</font></b><font color="red">（必填）</font></td>
+			</font></b><font color="red"></font></td>
 		</tr>
 		<tr>
 			<td align="right" width="6">　</td>
@@ -425,16 +442,22 @@
 			<td vAlign="top" noWrap><font class="mbody">通 訊 地 址&nbsp;</font></td>
 			<td colspan="2"><input size="45" name="pa"  value="<?php echo $mlist[0]["addr"];?>"> </td>
 		</tr>
+    -->
 		<tr>
 			<td vAlign="top" align="right" width="6">　</td>
 			<td vAlign="top" noWrap><font class="mbody">電　　&nbsp;&nbsp; 話</font></td>
-			<td colspan="2"><font size="2">市&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+			<td colspan="2">
+    <!--
+      <font size="2">市&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
 			話&nbsp; <input size="19" name="tp2"  value="<?php echo $mlist[0]["numberh"];?>"><br>
+      -->
 			行&nbsp; 動&nbsp;&nbsp;&nbsp;&nbsp; 電 話&nbsp; 
 			<input name="mp" size="25"  value="<?php echo $mlist[0]["cell"];?>"><br>
+    <!--
 			緊急連絡電話&nbsp; 
-			<!--webbot bot="Validation" s-data-type="Number" s-number-separators=",." --> 
-			<input name="mp1" size="25"  value="<?php echo $mlist[0]["numberc"];?>"></font></td>
+			<input name="mp1" size="25"  value="<?php echo $mlist[0]["numberc"];?>"></font>
+      -->
+      </td>
 		</tr>
 		<tr>
 			<td vAlign="top" align="right" width="6">　</td>
@@ -451,13 +474,15 @@
 			<input type="radio" value="2" name="pp" <?php if ($mlist[0]["prop"]==2) echo "checked";?>>否
 			<input type="radio" value="3" name="pp" <?php if ($mlist[0]["prop"]==3) echo "checked";?>>舊會員</td>
       -->
-			<input type="radio" value="1" name="pp" <?php if ($mlist[0]["prop"]==1) echo "checked";?>>網宣 
+			<input type="radio" value="1" name="pp" <?php if ($mlist[0]["prop"]==1) echo "checked";?>>網路
 			<input type="radio" value="4" name="pp" <?php if ($mlist[0]["prop"]==4) echo "checked";?>>親友
 			<input type="radio" value="5" name="pp" <?php if ($mlist[0]["prop"]==5) echo "checked";?>>社團<br>
 			<input type="radio" value="6" name="pp" <?php if ($mlist[0]["prop"]==6) echo "checked";?>>路過
-			<input type="radio" value="7" name="pp" <?php if ($mlist[0]["prop"]==7) echo "checked";?>>其他
+			<input type="radio" value="7" name="pp" <?php if ($mlist[0]["prop"]==2 || $mlist[0]["prop"]==3 || $mlist[0]["prop"]==7) echo "checked";?>>其他
+    <!--
 			<input type="radio" value="2" name="pp" <?php if ($mlist[0]["prop"]==2) echo "checked";?>>非網宣(舊式)<br>
 			<input type="radio" value="3" name="pp" <?php if ($mlist[0]["prop"]==3) echo "checked";?>>舊會員</td>
+      -->
 		</tr>
 		
 		<tr>

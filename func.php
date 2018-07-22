@@ -4,14 +4,20 @@
   /**************************************************/
   /**** change it before released *******************/
 
-  $isTEST = 0;
-  $isLinux = 1;
+  if (1) { /* develp */
+     $isTimeTEST = 0;
+     $isLinux = 1;
+ 		 $mysqli_password = "1234";
+  } else {
+     $isTimeTEST = 0;
+     $isLinux = 0;
+ 		 $mysqli_password = "";
+  }
 
   /**************************************************/
 
 	$mysqli_host = "localhost";
 	$mysqli_user = "root";
-	$mysqli_password = "1234";
 	$db_name = "dancer2";
 	
 	$MAX_PAGE = 100;
@@ -43,13 +49,36 @@
   }
 
 
+  function generateCallTrace()
+  {
+    $e = new Exception();
+    $trace = explode("\n", $e->getTraceAsString());
+    // reverse array to make steps line up chronologically
+    $trace = array_reverse($trace);
+    array_shift($trace); // remove {main}
+    array_pop($trace); // remove call to this method
+    $length = count($trace);
+    $result = array();
+    
+    for ($i = 0; $i < $length; $i++) {
+      $result[] = ($i + 1)  . ')' . substr($trace[$i], strpos($trace[$i], ' ')); // replace '#someNum' with '$i)', set the right ordering
+    }
+    
+    return "\t" . implode("\n\t", $result);
+  }
+
+  function CallTrace()
+  {
+    echo "<pre>".generateCallTrace()."</pre>";
+  }
+
 	function getNow()
 	{
 	  global $TIME_OFFSET;
-	  global $isTEST;
+	  global $isTimeTEST;
 
-    if ($isTEST) {
-	    return 1531330762+3*60*24+8*60+1*60*60+35*60 - 7*24*60*60;
+    if ($isTimeTEST) {
+	    return 1531330762+3*60*24+8*60+1*60*60+35*60 - 6*24*60*60;
     } else {
 	    return time() + $TIME_OFFSET;
     }
@@ -130,6 +159,7 @@
 			return $result;
 		}
 		else{
+      CallTrace();
 			die("Query failed: [$query]<br>" . mysqli_error($link));
 		}
 		// mysql_query("SET NAMES 'big5'") or die('Query failed: ' . mysql_error());
@@ -962,6 +992,7 @@
 			if (($book_list[$i]["online"] == 1 && $chkonline) || !$chkonline) {
        $bidmrk = "bid@".$book_list[$i]["sn"];
 			 $bidmrk_n = $chglist[$bidmrk];
+       if (empty($bidmrk_n)) $bidmrk_n = 0;
 
 			  //echo $bidmrk."=".$bidmrk_n;
 			  echo "";
