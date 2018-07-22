@@ -79,7 +79,7 @@
 
 <p>請要加買堂數!! 共 <font color="#0000FF" size="5"><a href="main2.php"><?php echo $quc;?></a> </font>位</p>
 -->
-<p><a href="query5.php">產生報表</a></p>
+<p><a href="query5.php" target="_new">產生報表</a></p>
 <br>
 <p><a href="main3.php">會員快到期列表(請耐心等待)!!</a>   (<a href="special1.html">裝潢區間列表</a>)</p>
 <p><a href="main3.php?special=1">會員快到期列表(請耐心等待)!!</a></p>

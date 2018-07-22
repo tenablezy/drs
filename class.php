@@ -94,7 +94,13 @@
 	}
 	//echo $today;
 	//echo $mid;
-	$chgcount = QueryDeQuotaByTime($chglist,$today);
+	//$f_dayofweek = my_strtotime(my_gmdate("", intval($today)));
+	$f_day = my_gmdate("N", intval($today));
+	$f_time = my_strtotime(my_gmdate("Y/m/d", intval($today))) - (($f_day -1)* 24 * 60 * 60);
+	//echo  my_gmdate("Y/m/d", intval($f_time));
+	$chgcount = QueryDeQuotaByTime($chglist,$f_time, 7*24*60*60);
+
+	//$chgcount = QueryDeQuotaByTime($chglist,$today);
 
   $book_num = getBook($book_list);
   $selbook_num = getBookByOrder ($selbook_list);
@@ -154,14 +160,14 @@
 <center>
 <table border="1" width="70%" id="book"  cellspacing=0 cellpadding=0>
 	<tr>
-		<td width="10%" bgcolor="#ccfef6"><center><font color="blue">Studio A</font></center></td>
-		<td rowspan="2" width="13%" bgcolor="#dddddd"><center><font size=5><b>一</b></center></td>
-		<td rowspan="2" width="13%" bgcolor="#dddddd"><center><font size=5><b>二</b></center></td>
-		<td rowspan="2" width="13%" bgcolor="#dddddd"><center><font size=5><b>三</b></center></td>
-		<td rowspan="2" width="13%" bgcolor="#dddddd"><center><font size=5><b>四</b></center></td>
-		<td rowspan="2" width="13%" bgcolor="#dddddd"><center><font size=5><b>五</b></center></td>
-		<td rowspan="2" width="13%" bgcolor="#dddddd"><center><font size=5><b>六</b></center></td>
-		<td rowspan="2" width="13%" bgcolor="#dddddd"><center><font size=5><b>日</b></center></td>
+		<td width="10%" bgcolor="#FFC2FF"><center><font color="blue">Studio A</font></center></td>
+		<td rowspan="2" width="13%" bgcolor="#dddddd"><center><font size=5><b>一 <br><font size=3>(<?php echo my_gmdate("m/d", intval($f_time)); ?>)</b></center></td>
+		<td rowspan="2" width="13%" bgcolor="#dddddd"><center><font size=5><b>二 <br><font size=3>(<?php echo my_gmdate("m/d", intval($f_time)+1*24*60*60); ?>)</b></center></td>
+		<td rowspan="2" width="13%" bgcolor="#dddddd"><center><font size=5><b>三 <br><font size=3>(<?php echo my_gmdate("m/d", intval($f_time)+2*24*60*60); ?>)</b></center></td>
+		<td rowspan="2" width="13%" bgcolor="#dddddd"><center><font size=5><b>四 <br><font size=3>(<?php echo my_gmdate("m/d", intval($f_time)+3*24*60*60); ?>)</b></center></td>
+		<td rowspan="2" width="13%" bgcolor="#dddddd"><center><font size=5><b>五 <br><font size=3>(<?php echo my_gmdate("m/d", intval($f_time)+4*24*60*60); ?>)</b></center></td>
+		<td rowspan="2" width="13%" bgcolor="#dddddd"><center><font size=5><b>六 <br><font size=3>(<?php echo my_gmdate("m/d", intval($f_time)+5*24*60*60); ?>)</b></center></td>
+		<td rowspan="2" width="13%" bgcolor="#dddddd"><center><font size=5><b>日 <br><font size=3>(<?php echo my_gmdate("m/d", intval($f_time)+6*24*60*60); ?>)</b></center></td>
 	</tr>
 
 	<tr> 

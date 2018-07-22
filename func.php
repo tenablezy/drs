@@ -977,7 +977,7 @@
 		  echo "<td width=\"\" bgcolor=\"#eeee00\"><font size=4>";
 		} else {
       if ($studio == "A" ) {
-		    echo "<td width=\"\" bgcolor=\"#ccfef6\"><font size=4>";
+		    echo "<td width=\"\" bgcolor=\"#ffc2ff\"><font size=4>";
       } else {
 		    echo "<td width=\"\" bgcolor=\"#aeffce\"><font size=4>";
       }

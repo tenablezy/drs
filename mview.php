@@ -131,8 +131,8 @@
 		//echo $sex."<br>";
 		//echo $by.$bm.$bd."<br>";
 		$birth = my_strtotime($by."/".$bm."/".$bd);
+    //echo $msy."/".$msm."/".$msd;
 		$mstart = my_strtotime($msy."/".$msm."/".$msd);
-    if ( empty($mstart_org)) $mstart_org = $mstart;
 		//echo $native."<br>";
 		//echo $id."<br>";
 		//echo $oc."<br>";	
@@ -263,8 +263,12 @@
 		exit(1);
 	}
 	$birth = getdate(intval($mlist[0]["birth"]));
-	$mstart = getdate(intval($mlist[0]["mstart"]));
+	$mstarts = getdate(intval($mlist[0]["mstart"]));
 	
+   if ( empty($mstart_org)) {
+      $mstart_org = $mlist[0]["mstart"];
+   }
+
 	
 	if ($mlist[0]["admin"] == 1) $sexbgc="#FFFF00" ;
 	else if ($mlist[0]["admin"] == 2) $sexbgc="#FFC2FF";
@@ -346,10 +350,10 @@
 		<tr>
 			<td align="right" width="6">　</td>
 			<td noWrap><font class="mbody">會員起始日</font></td>
-			<td>西 元 <input maxLength="4" size="1" name="msy" value="<?php echo $mstart["year"];?>"> 年 
-			<input maxLength="4" size="1" name="msm" value="<?php echo $mstart["mon"];?>">
+			<td>西 元 <input maxLength="4" size="1" name="msy" value="<?php echo $mstarts["year"];?>"> 年 
+			<input maxLength="4" size="1" name="msm" value="<?php echo $mstarts["mon"];?>">
 			</select> 月
-			<input maxLength="4" size="1" name="msd" value="<?php echo $mstart["mday"];?>">
+			<input maxLength="4" size="1" name="msd" value="<?php echo $mstarts["mday"];?>">
 			</select> 日</td>
 		</tr>			
 		<tr>

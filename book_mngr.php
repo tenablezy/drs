@@ -91,7 +91,7 @@
 	</tr>
 
 	<tr>
-		<td width="12.5%" bgcolor="#dddddddd"><center>(c) 18:45 <br>~ 20:00</center></td>
+		<td width="12.5%" bgcolor="#dddddddd"><center>(c) 19:00 <br>~ 20:15</center></td>
     <?php echoclassbook ($book_list, $book_num, "A", "c", 0 ); ?>
 	</tr>
 
@@ -125,7 +125,7 @@
 	</tr>
 
 	<tr>
-		<td width="12.5%" bgcolor="#dddddddd"><center>(c) 18:45 <br>~ 20:00</center></td>
+		<td width="12.5%" bgcolor="#dddddddd"><center>(c) 19:00 <br>~ 20:15</center></td>
     <?php echoclassbook ($book_list, $book_num, "B", "c", 0 ); ?>
 	</tr>
 
@@ -207,7 +207,7 @@
 	</tr>
 
 	<tr>
-		<td width="12.5%" bgcolor="#dddddddd"><center>(c) 18:45 <br>~ 20:00</center></td>
+		<td width="12.5%" bgcolor="#dddddddd"><center>(c) 19:00 <br>~ 20:15</center></td>
     <?php echoclassbook ($book_list, $book_num, "delete", "c", 0 ); ?>
 	</tr>
 

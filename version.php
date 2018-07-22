@@ -4,6 +4,24 @@
 
 	$i=0;
 
+	$infover[$i]["ver"] = "1.7.4";
+  $infover[$i]["date"]= "2018/07/22";
+  $infover[$i]["info"]= "
+    <BR>1. 課程人數精確 -> 0 人 要顯示 0  (done)
+    <BR>2. 粉色在淺一點 (done)
+    <BR>3. show 會員資料 要精簡 (done)
+    <BR>4. 修改課程的 時間也要改 19:00 (done)
+    <BR>5. 移除 非會員新增 (done)
+    <BR>6. 網宣改成 網路 (done)
+    <BR>7. '必填'移除 (done)
+    <BR>8. 2642 4/11 -> 4/12 有問題 (fix)
+    <BR>9. 移除點數顯示 (done)
+    <BR>10. 報表開新頁面 (done)
+    <BR>11. 課程>0 補 '+' (done)
+
+   ";
+  $i++;
+
 	$infover[$i]["ver"] = "1.7.3";
   $infover[$i]["date"]= "2018/07/10";
   $infover[$i]["info"]= "

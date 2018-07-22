@@ -115,6 +115,7 @@
   for ( $i = 0 ; $i < $maxlist1 ; $i ++) {
     if ($methd == "Report" ) {
       if ( $chglist1[$i]["type"] == 0 && strstr($chglist1[$i]["str"], "Remove Quota ") == 0) continue;
+      if ( $chglist1[$i]["type"] == 2 ) continue;
     } /* report */
 ?>
   <tr>
@@ -142,7 +143,7 @@
 							{
 								case "0": echo "Remove Quota";break;
 								case "1": echo "課堂";break;
-								case "2": echo "點數";break;
+								/*case "2": echo "點數";break; */
 								case "5": 
                     $b_studio= $b_teacher= $b_day= $b_time= $b_name= $b_sub_name=$b_comment=$b_online = "";
 					  findbook($chglist1[$i]["str"], $b_studio, $b_teacher, $b_day, $b_time, $b_name, $b_sub_name, $b_comment, $b_online);  
@@ -160,8 +161,13 @@
 							switch($chglist1[$i]["type"])
 							{
 								case "0": echo $chglist1[$i]["str"];break;
-								case "1": echo $chglist1[$i]["str"];break;
-								case "2": echo $chglist1[$i]["str"];break;
+								case "1": 
+                  if ( intval($chglist1[$i]["str"]) > 0 ) {
+                    echo "+";
+                  }
+                  echo $chglist1[$i]["str"];
+                  break;
+								/*case "2": echo $chglist1[$i]["str"];break;*/
 								case "5": 
                     $b_studio= $b_teacher= $b_day= $b_time= $b_name= $b_sub_name=$b_comment=$b_online = "";
 					  findbook($chglist1[$i]["str"], $b_studio, $b_teacher, $b_day, $b_time, $b_name, $b_sub_name, $b_comment, $b_online);  
