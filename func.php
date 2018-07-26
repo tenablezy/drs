@@ -4,11 +4,12 @@
   /**************************************************/
   /**** change it before released *******************/
 
-  if (0) { /* develp */
+  if (1) { /* develp */
      $isTimeTEST = 1;
      $isLinux = 1;
  		 $mysqli_password = "1234";
  		 $NONMEMBER_ID= "bbb";
+
   } else {
      $isTimeTEST = 0;
      $isLinux = 0;
@@ -43,11 +44,13 @@
     $BACKUP_PATH = "/home/nick/public_html/backup/";
     $MYSQL_DUMP = "mysqldump";
     $DOWNLOA_PATH = "/home/nick/public_html/backup/";
+    $SQL_SEC_PATH= $BACKUP_PATH;
 
   } else {
     $BACKUP_PATH = "d:\\systembackup\\";
 	  $MYSQL_DUMP = "C:\wamp64\bin\mysql\mysql5.7.14\bin\mysqldump.exe";
     $DOWNLOA_PATH = "d:\\systembackup\\";
+    $SQL_SEC_PATH="c:/wamp64/tmp/";
   }
 
 
@@ -216,7 +219,7 @@
 			//$tosrc_root = "c:/backup/";
 			//$tosrc_root = "d:/systembackup/";
 			//$tosrc_root = $BACKUP_PATH;
-			$tosrc_root = "c:/wamp64/tmp/";
+			$tosrc_root = $SQL_SEC_PATH;
     
 			$tosrc = $tosrc_root.$bpdate."_drs_sql_user_db.sql";
             //echo "\n".$tosrc;
