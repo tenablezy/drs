@@ -4,7 +4,7 @@
   /**************************************************/
   /**** change it before released *******************/
 
-  if (1) { /* develp */
+  if (0) { /* develp */
      $isTimeTEST = 1;
      $isLinux = 1;
  		 $mysqli_password = "1234";
@@ -39,7 +39,7 @@
 	
 	error_reporting(0);
 
-  if (isLinux) {
+  if ($isLinux) {
     $BACKUP_PATH = "/home/nick/public_html/backup/";
     $MYSQL_DUMP = "mysqldump";
     $DOWNLOA_PATH = "/home/nick/public_html/backup/";
@@ -190,7 +190,9 @@
       echo $bpdate;
 
 
-      $command = "$MYSQL_DUMP --opt -h $mysqli_host -u $mysqli_user -p$mysqli_password $db_name > $BACKUP_PATH$db_name.$bpdate.sql";
+			if ($mysqli_password == "") $cmd_passwd = "";
+			else $cmd_pass = "- p $mysqli_password";
+      $command = "$MYSQL_DUMP --opt -h $mysqli_host -u $mysqli_user $cmd_pass $db_name > $BACKUP_PATH$db_name.$bpdate.sql";
       echo $command;
       echo exec($command);
     
@@ -213,7 +215,8 @@
 			//echo $cmd;
 			//$tosrc_root = "c:/backup/";
 			//$tosrc_root = "d:/systembackup/";
-			$tosrc_root = $BACKUP_PATH;
+			//$tosrc_root = $BACKUP_PATH;
+			$tosrc_root = "c:/wamp64/tmp/";
     
 			$tosrc = $tosrc_root.$bpdate."_drs_sql_user_db.sql";
             //echo "\n".$tosrc;
@@ -231,7 +234,6 @@
       } else {
 			  echo "<br>fail 備份程式失敗!!<br>";
       }
-
   }
 
 	function AddMember ($name) {
