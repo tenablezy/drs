@@ -74,8 +74,8 @@
 ?>
 
 <meta http-equiv="Content-Language" content="zh-tw">
-<meta http-equiv="Content-Type" content="text/html; charset=big5">
-<?php header('Content-type: text/html; charset=big5'); ?>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<?php header('Content-type: text/html; charset=utf-8'); ?>
 <title>新增網頁1</title>
 </head>
 

@@ -52,7 +52,7 @@
   if ( $methd == "Report") {
       /* SELECT `mid`,MIN(`time`) FROM `change` GROUP BY `mid` HAVING MIN(`time`) BETWEEN 1530403200 AND 1532217600 ORDER BY MIN(`time`) DESC */
       $sel = "*";
-      $rule = "OR (`mid` LIKE '%' AND `time` >= $stime AND `time` <= $etime ) ";
+      $rule = "OR (`mid` LIKE '%' AND `mid` != '$NONMEMBER_ID' AND `time` >= $stime AND `time` <= $etime ) ";
       $maxlist1 = QueryChanges ($chglist1, "*", $sel, $rule);
       echo "maxlist1=".$maxlist1;
   }
@@ -60,8 +60,7 @@
   if ( $methd == "QNonMember") {
       /* SELECT `mid`,MIN(`time`) FROM `change` GROUP BY `mid` HAVING MIN(`time`) BETWEEN 1530403200 AND 1532217600 ORDER BY MIN(`time`) DESC */
       $sel = "*";
-      $rule = "OR (`mid` = 'NonMember' AND `time` >= $stime AND `time` <= $etime ) ";
-      $rule = "OR (`mid` = 'bbb' AND `time` >= $stime AND `time` <= $etime ) ";
+      $rule = "OR (`mid` = '$NONMEMBER_ID' AND `time` >= $stime AND `time` <= $etime ) ";
       $maxlist1 = QueryChanges ($chglist1, "*", $sel, $rule);
       echo "maxlist1=".$maxlist1;
   }

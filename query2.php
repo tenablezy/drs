@@ -35,14 +35,13 @@
 <html>
 
 <head>
+<meta http-equiv="Content-Language" content="utf-8">
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 <?php
   CCS_jq_head ();
 ?>
 
-<meta http-equiv="Content-Language" content="zh-tw">
-<meta http-equiv="Content-Type" content="text/html; charset=big5">
-<?php header('Content-type: text/html; charset=big5'); ?>
-<title>?s?W????1</title>
+<title>精密統計</title>
 </head>
 
 <body >
@@ -70,9 +69,10 @@
 		<td width="30%">Time</td>
 		<td width="10%">Boys</td>
 		<td width="10%">Girls</td>
-		<td width="10%">?|??</td>
-		<td width="10%">?D?|??</td>
-		<td width="10%">?ǥ?</td>
+		<td width="10%">非會員</td>
+		<td width="10%">會員</td>
+		<td width="10%">學生</td>
+		<td width="10%">非學生</td>
 		<td width="10%">Count</td>
 	</tr>
 
@@ -98,6 +98,7 @@
    $ncount 		= 0;	//?}?Y?D?|??
    $lumicount 	= 0;	//Lumi?}?Y?|??
    $studcount	= 0;
+   $nstudcount	= 0;
 /*   $zerocount 	= 0;
    $tencount	= 0;
    $twentycount	= 0;
@@ -127,15 +128,19 @@
 			$lumicount++;
 		}
 		
-		if($chglist[$i]["what"] == "?ǥ?"){
+      echo $chglist[$i]["what"];
+		if($chglist[$i]["what"] == "學生"){
 			$studcount++;
-		}
+		} else {
+			$nstudcount++;
+    }
    }
    $timelist[$count]["boycount"] 	= $boycount;
    $timelist[$count]["girlcount"] 	= $girlcount;
    $timelist[$count]["ncount"] 		= $ncount;
    $timelist[$count]["lumicount"] 	= $lumicount;
    $timelist[$count]["studcount"] 	= $studcount;
+   $timelist[$count]["nstudcount"] 	= $nstudcount;
    $count ++;
 
    $today = $etoday;
@@ -171,6 +176,7 @@
 		<td width="10%"><?php echo $timelist[$i]["lumicount"]; ?></td>
 		<td width="10%"><?php echo $timelist[$i]["ncount"]; ?></td>
 		<td width="10%"><?php echo $timelist[$i]["studcount"]; ?></td>
+		<td width="10%"><?php echo $timelist[$i]["nstudcount"]; ?></td>
 		<td width="10%"><?php echo $timelist[$i]["chgcount"]; ?></td>
 	</tr>
 

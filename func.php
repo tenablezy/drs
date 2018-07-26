@@ -8,10 +8,12 @@
      $isTimeTEST = 1;
      $isLinux = 1;
  		 $mysqli_password = "1234";
+ 		 $NONMEMBER_ID= "bbb";
   } else {
      $isTimeTEST = 0;
      $isLinux = 0;
  		 $mysqli_password = "";
+ 		 $NONMEMBER_ID = "nonmember";
   }
 
   /**************************************************/
