@@ -47,6 +47,10 @@
   $passwd    = _get("passwd");
   $comment   = _get("comment");
   $addquotaOne = _get("addquotaOne");
+  $nonmember_1= _get("nonmember_1");
+
+  echo $nonmember_1;
+	if (!empty($nonmember_1)) { $mid = $NONMEMBER_ID;}
 
 	if ( empty($mid) && !empty($mid2)) $mid = $mid2;
 	
@@ -210,6 +214,7 @@
       <p>請輸入會員編號 
         <input type="text" name="mid" size="25" id="mid">	
         <input type="submit" value="查詢" name="querymid" id="querymid">	
+        <input type="submit" value="非會員查詢" name="nonmember_1" id="nonmember_1">	
       </p>
 <?php
 if ($mcount >0) { 

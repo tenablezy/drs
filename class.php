@@ -16,6 +16,14 @@
 	require ("func.php");
 	
   $mid = _get("mid");
+  $nonmemberclass = _get("nonmemberclass");
+
+  //echo $mid.$nonmemberclass;
+  if (empty($mid) && !empty($nonmemberclass)) {
+    echo "非會員: ".$NONMEMBER_ID." 上課!";
+    $mid = $NONMEMBER_ID;
+  }
+
   $now = _get("now");
   $showm = _get("showm");
   $bid   = _get("bid");
@@ -40,6 +48,7 @@
 	}
 	
 	//echo "-".my_gmdate("Y/m/d H:m", intval($today));
+	//echo $mid;
 	if ( !empty($mid)) $addcls="sendout";
 	//echo $addcls;
 	if (!empty($addcls) && !empty($mid)) {
@@ -148,7 +157,9 @@
 	</select>
 
 	<input type="submit" value="送出" name="addcls" id="addcls">
-	<input type="reset" value="重新設定" ></p>
+	<input type="reset" value="重新設定" >
+	<input type="submit" value="非會員上課" name="nonmemberclass" id="nonmemberclass">
+</p>
 	<?php }?>
 </form>
 <p>今日登記人數: <b><font color="#0000FF" size="5"><?php echo $chgcount;?></font></b> 人次</p>
@@ -282,6 +293,10 @@
 		<td width="15%">剩餘課堂</td>
 	</tr>
 	<?php 
+
+
+	  $chgcount = QueryDeQuotaByTime($chglist,$today);
+
 		$link = openmysql();
 		for ($i=0 ; $i < $chgcount ; $i++) {
 			
