@@ -4,6 +4,17 @@
 
 	$i=0;
 
+	$infover[$i]["ver"] = "1.7.5";
+  $infover[$i]["date"]= "2018/07/26";
+  $infover[$i]["info"]= "
+    <BR>1. nonmember 扣堂數
+    <BR>2. remove 點數
+    <BR>3. 刪除 pool 不顯示
+    <BR>4. 男女統計亂碼
+    <BR>5. 會員 課堂快到期 remove
+   ";
+  $i++;
+
 	$infover[$i]["ver"] = "1.7.4";
   $infover[$i]["date"]= "2018/07/22";
   $infover[$i]["info"]= "

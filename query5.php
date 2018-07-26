@@ -57,6 +57,15 @@
       echo "maxlist1=".$maxlist1;
   }
 	
+  if ( $methd == "QNonMember") {
+      /* SELECT `mid`,MIN(`time`) FROM `change` GROUP BY `mid` HAVING MIN(`time`) BETWEEN 1530403200 AND 1532217600 ORDER BY MIN(`time`) DESC */
+      $sel = "*";
+      $rule = "OR (`mid` = 'NonMember' AND `time` >= $stime AND `time` <= $etime ) ";
+      $rule = "OR (`mid` = 'bbb' AND `time` >= $stime AND `time` <= $etime ) ";
+      $maxlist1 = QueryChanges ($chglist1, "*", $sel, $rule);
+      echo "maxlist1=".$maxlist1;
+  }
+	
 
   if ( $methd == "NewAdd") {
     /* SELECT `mid`,MIN(`time`) FROM `change` GROUP BY `mid` HAVING MIN(`time`) BETWEEN 1530403200 AND 1532217600 ORDER BY MIN(`time`) DESC */
@@ -87,8 +96,9 @@
   <input type="text" name="etime_str" id="etime_str" size="20" value="<?php echo $etime_str; ?>">
 	
 	<select size="1" name="methd">
-	    <option value="Report"   <?php if ($methd == "Report") echo "selected";?> >會員紀錄</option>
-	    <option value="NewAdd"   <?php if ($methd == "NewAdd") echo "selected";?> >新會員</option>
+	    <option value="QNonMember"  <?php if ($methd == "QNonMember") echo "selected";?> >非會員查詢</option>
+	    <option value="Report"      <?php if ($methd == "Report") echo "selected";?> >會員紀錄</option>
+	    <option value="NewAdd"      <?php if ($methd == "NewAdd") echo "selected";?> >新會員</option>
 	</select>
   <!--
 	Teacher:
@@ -113,9 +123,14 @@
   </tr>
 <?php
   for ( $i = 0 ; $i < $maxlist1 ; $i ++) {
-    if ($methd == "Report" ) {
+    if ($methd == "Report" || $methd == "QNonMember") {
       if ( $chglist1[$i]["type"] == 0 && strstr($chglist1[$i]["str"], "Remove Quota ") == 0) continue;
       if ( $chglist1[$i]["type"] == 2 ) continue;
+
+      if ($methd == "QNonMember" ) {
+        if ( $chglist1[$i]["type"] == 1 ) continue;
+      }
+
     } /* report */
 ?>
   <tr>
@@ -127,7 +142,7 @@
 
     <td>
 <?php
-    if ($methd == "Report" ) {
+    if ($methd == "Report" || $methd == "QNonMember" ) {
 		    echo gmdate("Y/m/d H:i:s",intval($chglist1[$i]["time"]));
     }
     if ($methd == "NewAdd" ) {

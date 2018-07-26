@@ -184,6 +184,7 @@
 </form>
 
 <!-- class 0 -->
+<!--
 <table border="1" width="70%" id="book">
 	<tr>
 		<td width="12.5%" bgcolor="#dddddddd"><center><font color="blue">§R°£ Pool</font></center></td>
@@ -216,6 +217,7 @@
     <?php echoclassbook ($book_list, $book_num, "delete", "d", 0); ?>
 	</tr>
 </table>
+-->
 
 </body>
 

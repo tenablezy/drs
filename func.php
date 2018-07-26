@@ -5,7 +5,7 @@
   /**** change it before released *******************/
 
   if (1) { /* develp */
-     $isTimeTEST = 0;
+     $isTimeTEST = 1;
      $isLinux = 1;
  		 $mysqli_password = "1234";
   } else {
@@ -683,7 +683,7 @@
 		
 		$query = "SELECT * FROM `register` WHERE CAST(`time` AS UNSIGNED) >= $time ".
 							"AND CAST(`time` AS UNSIGNED) < $totime ORDER BY `time` DESC";
-	/*echo $query;*/
+	  echo $query;
 		$result = mysqli_statment($link,$query);
 		
 		$rt = 0;
