@@ -318,9 +318,11 @@
 				}	else {
 			?>
 
+<!--
 			<input type="radio" value="1" name="vip" <?php if ($mlist[0]["admin"]==1) echo "checked";?>>VIP 
 			<input type="radio" value="2" name="vip" <?php if ($mlist[0]["admin"]==2) echo "checked";?>>一般會員
 			<input type="radio" value="3" name="vip" <?php if ($mlist[0]["admin"]==3) echo "checked";?>>非會員 
+-->
 			<!-- <input type="radio" value="4" name="vip" <?php if ($mlist[0]["admin"]==4) echo "checked";?>>姐妹卡  -->
 			<?php } ?>
 			</td>			
