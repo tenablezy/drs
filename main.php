@@ -82,13 +82,13 @@
 <p><a href="query5.php" target="_new">產生報表</a></p>
 <br>
 <p><a href="main3.php">會員快到期列表(請耐心等待)!!</a>   (<a href="special1.html">裝潢區間列表</a>)</p>
-<p><a href="main3.php?special=1">會員快到期列表(請耐心等待)!!</a></p>
-<p><a href="main4.php">課堂快到期列表(請耐心等待)!!</a></p>
-<p><a href="query.php">近一個月課堂統計表!!</a></p>
-<p><a href="query2.php">精密統計表!!</a></p>
-<p><a href="query3.php">課堂統計表!!</a></p>
+<!-- <p><a href="main3.php?special=1">會員快到期列表(請耐心等待)!!</a></p>-->
+<!-- <p><a href="main4.php">課堂快到期列表(請耐心等待)!!</a></p>-->
+<!-- <p><a href="query.php">近一個月課堂統計表!!</a></p>-->
+<!-- <p><a href="query2.php">精密統計表!!</a></p>-->
+<!-- <p><a href="query3.php">課堂統計表!!</a></p>-->
 <p><a href="query4.php">老師課堂統計表!!</a></p>
-<p><a href="book_mngr.php">修改上課 課程</a></p>
+<!-- <p><a href="book_mngr.php">修改上課 課程</a></p> -->
 </body>
 
 </html>
