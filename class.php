@@ -107,6 +107,7 @@
 	$f_day = my_gmdate("N", intval($today));
 	$f_time = my_strtotime(my_gmdate("Y/m/d", intval($today))) - (($f_day -1)* 24 * 60 * 60);
 	//echo  my_gmdate("Y/m/d", intval($f_time));
+	$chgcount_today = QueryDeQuotaByTime($chglist_today,$today);
 	$chgcount = QueryDeQuotaByTime($chglist,$f_time, 7*24*60*60);
 
 	//$chgcount = QueryDeQuotaByTime($chglist,$today);
@@ -162,7 +163,7 @@
 </p>
 	<?php }?>
 </form>
-<p>今日登記人數: <b><font color="#0000FF" size="5"><?php echo $chgcount;?></font></b> 人次</p>
+<p>今日登記人數: <b><font color="#0000FF" size="5"><?php echo $chgcount_today;?></font></b> 人次</p>
 
 <a href="book_mngr.php">Book Manager</a>  
 
@@ -295,7 +296,9 @@
 	<?php 
 
 
-	  $chgcount = QueryDeQuotaByTime($chglist,$today);
+	  //$chgcount = QueryDeQuotaByTime($chglist,$today);
+    $chgcount = $chgcount_today;
+    $chglist  = $chglist_today;
 
 		$link = openmysql();
 		for ($i=0 ; $i < $chgcount ; $i++) {

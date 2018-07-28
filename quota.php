@@ -373,6 +373,7 @@ if ($mcount >0) {
 									case "1": echo "½Ò°ó]=> ".$chglist[$i]["str"];break;
 									case "2": echo "ÂI¼Æ]=> ".$chglist[$i]["str"];break;
 									case "5": 
+                      $b_studio= $b_teacher= $b_day= $b_time= $b_name= $b_sub_name=$b_comment=$b_online = "";
                       findbook($chglist[$i]["str"], $b_studio, $b_teacher, $b_day, $b_time, $b_name, $b_sub_name, $b_comment, $b_online);  
                       echo "¤W½Ò]=> ".$b_name."(".$b_teacher.")";
                       break;

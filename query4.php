@@ -74,8 +74,8 @@
 ?>
 
 <meta http-equiv="Content-Language" content="zh-tw">
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-<?php header('Content-type: text/html; charset=utf-8'); ?>
+<meta http-equiv="Content-Type" content="text/html; charset=big5">
+<?php header('Content-type: text/html; charset=big5'); ?>
 <title>·s¼Wºô­¶1</title>
 </head>
 

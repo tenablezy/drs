@@ -4,7 +4,7 @@
   /**************************************************/
   /**** change it before released *******************/
 
-  if (1) { /* develp */
+  if (0) { /* develp */
      $isTimeTEST = 1;
      $isLinux = 1;
  		 $mysqli_password = "1234";
@@ -842,7 +842,8 @@
 			"[".$list[$rt]["studio"]."] ".
 			$list[$rt]["teacher"]."- ".
 			$list[$rt]["name"].
-			" (".$list[$rt]["sub_name"].")";
+        "";
+			//" (".$list[$rt]["sub_name"].")";
 
 
 			$rt ++;
