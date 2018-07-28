@@ -690,7 +690,7 @@
 		
 		$query = "SELECT * FROM `register` WHERE CAST(`time` AS UNSIGNED) >= $time ".
 							"AND CAST(`time` AS UNSIGNED) < $totime ORDER BY `time` DESC";
-	  echo $query;
+	  //echo $query;
 		$result = mysqli_statment($link,$query);
 		
 		$rt = 0;
