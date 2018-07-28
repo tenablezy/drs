@@ -80,7 +80,6 @@
 <p>請要加買堂數!! 共 <font color="#0000FF" size="5"><a href="main2.php"><?php echo $quc;?></a> </font>位</p>
 -->
 <p><a href="query5.php" target="_new">產生報表</a></p>
-<br>
 <p><a href="main3.php">會員快到期列表!</a></p>
 <!-- <p><a href="main3.php?special=1">會員快到期列表(請耐心等待)!!</a></p>-->
 <!-- <p><a href="main4.php">課堂快到期列表(請耐心等待)!!</a></p>-->
@@ -89,6 +88,7 @@
 <!-- <p><a href="query3.php">課堂統計表!!</a></p>-->
 <p><a href="query4.php">老師課堂統計表!!</a></p>
 <!-- <p><a href="book_mngr.php">修改上課 課程</a></p> -->
+<br>
 </body>
 
 </html>
