@@ -184,7 +184,7 @@
 	}
 
   function BackupSystem () {
-     global $BACKUP_PATH;
+     global $BACKUP_PATH, $SQL_SEC_PATH;
      global $MYSQL_DUMP;
 		global $mysqli_host,$mysqli_user,$mysqli_password,$db_name;
 
