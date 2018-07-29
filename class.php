@@ -96,7 +96,7 @@
 			?><embed src="chord.wav" autoplay=true hidden=true></embed><?php
 			exit(1);
 		} else {
-			echo "會員 ".$mlist[0]["name"]."(".$mlist[0]["mid"].") 課程用完 或錯誤的課程!!";
+			echo "會員 <a href=mview.php?mid=".$mlist[0]["mid"].">".$mlist[0]["name"]."(".$mlist[0]["mid"]."</a>) 課程用完 或錯誤的課程!!";
 			?><embed src="chord.wav" autoplay=true hidden=true></embed><?php
 			exit(1);
 		}
@@ -135,8 +135,8 @@
 	
 <?php if ($showm) { 
   ?>
-	<p>請輸入會員編號 <input type="text" name="mid" size="25" id="mid" >
- 
+	<p>
+  選課: 
 	<select size="1" name="bid">
 	    <option value="0">None</option>
   <?php 
@@ -149,17 +149,19 @@
 		    echo " >". 
 				"[".$selbook_list[$i]["studio"]."] ".
 				$selbook_list[$i]["teacher"]."- ".
-				$selbook_list[$i]["name"].
-				" (".$selbook_list[$i]["sub_name"].")".
+				$selbook_list[$i]["name"];
 				"</option>";
 		}
     }
   ?>
 	</select>
 
-	<input type="submit" value="送出" name="addcls" id="addcls">
-	<input type="reset" value="重新設定" >
+  <br>請輸入會員編號:
 	<input type="submit" value="非會員上課" name="nonmemberclass" id="nonmemberclass">
+  <input type="text" name="mid" size="25" id="mid" >
+ 
+	<input type="submit" value="送出" name="addcls" id="addcls">
+	<input type="reset" value="重新設定" ><br>
 </p>
 	<?php }?>
 </form>

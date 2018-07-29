@@ -55,6 +55,13 @@
       $rule = "OR (`mid` LIKE '%' AND `mid` != '$NONMEMBER_ID' AND `time` >= $stime AND `time` <= $etime ) ";
       $maxlist1 = QueryChanges ($chglist1, "*", $sel, $rule);
       echo "maxlist1=".$maxlist1;
+
+        /* SELECT `mid`,MIN(`time`) FROM `change` GROUP BY `mid` HAVING MIN(`time`) BETWEEN 1530403200 AND 1532217600 ORDER BY MIN(`time`) DESC */
+        $sel = "`mid`,MIN(`time`)";
+        $rule = "OR (`mid` LIKE '%') GROUP BY `mid` HAVING MIN(`time`) BETWEEN $stime AND $etime ";
+        $order = "MIN(`time`) DESC";
+        $maxlist_newadd = QueryChanges ($chglist_newadd, "*", $sel, $rule, $order);
+        echo ",maxlist_newad=".$maxlist_newadd;
   }
 	
   if ( $methd == "QNonMember") {
@@ -126,9 +133,24 @@
       if ( $chglist1[$i]["type"] == 0 && strstr($chglist1[$i]["str"], "Remove Quota ") == 0) continue;
       if ( $chglist1[$i]["type"] == 2 ) continue;
 
+      if ( $methd == "Report" && $chglist1[$i]["type"] == 99) {
+          /* skip new added */
+          for ( $j = 0; $j < $maxlist_newadd ; $j ++) {
+              if ( $chglist1[$i]["mid"] == $chglist_newadd[$j]["mid"]) {
+                //echo ",found !!";
+                break;
+              }
+          }
+
+          if ( $j < $maxlist_newadd ) {
+              continue;
+          }
+      }
+
       if ($methd == "QNonMember" ) {
         if ( $chglist1[$i]["type"] == 1 ) continue;
       }
+
 
     } /* report */
 ?>
