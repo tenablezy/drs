@@ -154,7 +154,32 @@
 
     } /* report */
 ?>
-  <tr>
+  <tr
+  
+					<?php
+
+								switch($chglist1[$i]["type"])
+								{
+									case "0": 
+                      if ( strstr($chglist1[$i]["str"], "Remove Quota ")) {
+                        echo "bgColor=\"#CC0000\""; 
+                      } else {
+                      }
+                      break;
+									case "1": 
+                      if (  !strstr($chglist1[$i]["str"], "-" )) {
+                        echo "bgColor=\"#AAAAFF\""; 
+                      } else {
+                        echo "bgColor=\"#CCFFFF\""; 
+                      }
+                      break;
+									case "5": echo "bgColor=\"#f5f09a\""; break;
+									case "99": echo "bgColor=\"#88ff00\""; break;
+                }
+            ?>
+  
+  
+  >
     <td>
 <?php
     echo "<a href=\"mview.php?mid=".$chglist1[$i]["mid"]."\">".$chglist1[$i]["mid"]."</a>";
