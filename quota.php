@@ -312,7 +312,7 @@ if ($mcount >0) {
         <input type="hidden" value="<?php echo $mlist[0]["quota"];?>" name="old_quota" id="old_quota">	 	
         <input type="hidden" value="<?php echo $mlist[0]["bound"];?>" name="old_bound" id="old_bound">	 	
         <!-- <input type="submit" value="購買一堂" name="addquotaOne" id="addquotaOne">&nbsp; 	 -->
-		<input type="submit" value="其他修改" name="addquota" id="addquota">&nbsp; 	
+		<input type="submit" value="確定修改" name="addquota" id="addquota">&nbsp; 	
         <!-- <input type="reset" value="重新設定" > -->
         <input type="submit" value="清除" name="class_reset" id="class_reset">
       </p>

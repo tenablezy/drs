@@ -131,7 +131,7 @@
 		//if (empty($oc)) 			{$checkerror=1; echo "請輸入會員職業<br>";}
 		//if (empty($pc) || empty($pa)) {$checkerror=1; echo "請輸入會員地址<br>";}
 		//if (empty($wc) || empty($wc)) {$checkerror=1; echo "請輸入會員公司/學校名稱<br>";}
-		//if (empty($em)) {$checkerror=1; echo "請輸入會員E-Mail<br>";}
+		if (empty($em)) {$checkerror=1; echo "請輸入會員E-Mail<br>";}
 		//if (empty($tp2)) {$checkerror=1; echo "請輸入會員市話<br>";}
 		if (empty($mp) || intval($mp) == 0) {$checkerror=1; echo "請輸入會員電話<br>";}
 		if (empty($pp) ) {$checkerror=1; echo "請輸入如何得知LUMI?<br>";}
@@ -458,14 +458,12 @@
 			<td colSpan="3"><b><font class="mbody" color="#2c8383"><!--地址∕-->聯絡資料 
 			</font></b><font color="red"></font></td>
 		</tr>
-		<!--
 		<tr>
 			<td align="right" width="6">　</td>
 			<td noWrap><font class="mbody">聯 絡 信 箱</font></td>
 			<td><input size="51" name="em"> 
 			</td>
 		</tr>
-    -->
 		<tr>
 			<td vAlign="top" align="right" width="6">　</td>
 			<td>行動電 話&nbsp; </td>

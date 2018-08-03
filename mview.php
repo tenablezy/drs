@@ -166,6 +166,7 @@
 		$query = "UPDATE `dancer2`.`user` ".
 			"SET `name` = '$name', `sex`='$sex', ".
 			"`birth` = '$birth', `cell`='$cell', ".
+			"`email` = '$email', ".
 			"`what`='$what', `admin`= '$admin', `remark`= '$remark', `prop`= '$pp'". 
 			" WHERE `user`.`mid` ='$mid' LIMIT 1";
 
@@ -436,6 +437,12 @@
 			</font></b><font color="red"></font></td>
 		</tr>
 		<tr>
+			<td vAlign="top" align="right" width="6">　</td>
+			<td vAlign="top" noWrap><font class="mbody">通 訊 地 址&nbsp;</font></td>
+			<td colspan="2"><input size="45" name="pa"  value="<?php echo $mlist[0]["addr"];?>"> </td>
+		</tr>
+    -->
+		<tr>
 			<td align="right" width="6">　</td>
 			<td noWrap><font class="mbody">聯 絡 信 箱</font></td>
 			<td colspan="2"><input size="51" name="em"  value="<?php echo $mlist[0]["email"];?>"> 
@@ -443,19 +450,13 @@
 		</tr>
 		<tr>
 			<td vAlign="top" align="right" width="6">　</td>
-			<td vAlign="top" noWrap><font class="mbody">通 訊 地 址&nbsp;</font></td>
-			<td colspan="2"><input size="45" name="pa"  value="<?php echo $mlist[0]["addr"];?>"> </td>
-		</tr>
-    -->
-		<tr>
-			<td vAlign="top" align="right" width="6">　</td>
 			<td vAlign="top" noWrap><font class="mbody">電　　&nbsp;&nbsp; 話</font></td>
 			<td colspan="2">
     <!--
       <font size="2">市&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
 			話&nbsp; <input size="19" name="tp2"  value="<?php echo $mlist[0]["numberh"];?>"><br>
-      -->
 			行&nbsp; 動&nbsp;&nbsp;&nbsp;&nbsp; 電 話&nbsp; 
+      -->
 			<input name="mp" size="25"  value="<?php echo $mlist[0]["cell"];?>"><br>
     <!--
 			緊急連絡電話&nbsp; 
