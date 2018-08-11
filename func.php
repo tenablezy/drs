@@ -31,7 +31,7 @@
 	  global $isTimeTEST;
 
     if ($isTimeTEST) {
-	    return 1531330762+3*60*24+8*60+1*60*60+35*60 - 6*24*60*60;
+	    return 1531330762+3*60*24+8*60+1*60*60+35*60 - 6*24*60*60 + $isTimeTEST;
     } else {
 	    return time() + $TIME_OFFSET;
     }

@@ -13,6 +13,7 @@
 	
   $mid  = _get("mid");
   $mid2 = _get("mid2");
+  $bid   = _get("bid");
 
 	$addquota = _get("addquota");
 	$addquota_5 = _get("addquota_5");
@@ -78,15 +79,18 @@
 	if (!empty($classout_10)) {  $classes = "10"; $bounds = "0"; }
 	if (!empty($classout_20)) {  $classes = "20"; $bounds = "0"; }
 
-  if ( !empty($class_reset))  {
-  $classes = "0";
-	      $bounds = "0";
+  if ( !empty($class_reset) || empty($classes))  {
+    $classes = "0";
+	  $bounds = "0";
+	  $passwd = "0";
+    $bid = "0";
   }
 	
 	
 	$now = getNow();	
 	$mcount = 0;
 	
+  $selbook_num = getBookByOrder ($selbook_list);
 	if ( !empty($addquota) && !empty($classes) && $classes != 0 && $passwd == $QUOTA_PASS){
 		
 		//echo $old_quota;
@@ -134,9 +138,17 @@
 		//echo "修改完成";
 		//header('Location: class.php');
 		//echo $mid;
+
+    /* select  class record*/
+    //echo $classes;
+    if (!empty($bid) && $bid && $classes < 0) {
+	    LogMemberInfo($mid, $now, "5", $bid);
+	    RegMemberInfo($mid, $bid, $now, $mlist[0]["sex"], $mlist[0]["admin"], $mlist[0]["birth"], $mlist[0]["what"]);
+    }
+
 		$classes = 0;
 		header("Location: quota.php?mid=".$mid);
-	} if ( !empty($addquota) && !empty($classes) && $classes != 0 && $passwd != $QUOTA_PASS){
+	} else if ( !empty($addquota) && !empty($classes) && $classes != 0 && $passwd != $QUOTA_PASS){
 		echo "密碼不正確";
     exit(1);
   }
@@ -155,6 +167,8 @@
 		//echo "修改完成";
 		//header('Location: class.php');
 		//echo $mid;
+
+
 		$classes = 0;
 		header("Location: quota.php?mid=".$mid);
 	} else if ( !empty($addquota) && !empty($bounds) && $bounds != 0 && $passwd != $QUOTA_PASS){
@@ -203,11 +217,14 @@
 
 	  $chgcount = QueryChanges($chglist, $mid);
 	}
-  ?>
+
+
+?>
   <body >
     <p><b>
-        <font size="5">新增減點數及紅利
-        </font></b>
+        <font size="5">新增減點數及紅利 </font>
+        <font size="5" color=blue><b><?php echo my_gmdate("Y/m/d (D) H:i:s", intval($now));?></b></font>
+        </b>
     </p>
     <hr>
     <form name="ProfileForm" method="post" action="quota.php">	
@@ -303,7 +320,27 @@ if ($mcount >0) {
       <?php }?>
 
       <p>
-      備註資訊: <input type="text" name="comment" size="27" id="comment"><br>
+      備註資訊: <input type="text" name="comment" size="27" id="comment">
+
+  選課: 
+	<select size="1" name="bid">
+	    <option value="0">None</option>
+  <?php 
+    for ($i = 0 ; $i < $selbook_num ; $i++) 
+    {
+		  if($selbook_list[$i]["studio"] != "delete" && $selbook_list[$i]["online"] == 1){
+			echo "<option value=\"".$selbook_list[$i]["sn"]."\"";
+		    if ( $bid == $selbook_list[$i]["sn"] && $bid)
+			    echo " selected ";
+		    echo " >". 
+				"[".$selbook_list[$i]["studio"]."] ".
+				$selbook_list[$i]["teacher"]."- ".
+				$selbook_list[$i]["name"];
+				"</option>";
+		  }
+    }
+  ?>
+  </select>
       <hr>
       請輸入 授權碼  	<input type="password" name="passwd" size="27" id="mid0">
       </p>	
