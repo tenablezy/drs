@@ -713,7 +713,7 @@
   }
 
 
-	function mapNow2class (&$day, &$time, $margin=0, $end_margin) {
+	function mapNow2class (&$day, &$time, $margin=0, $end_margin =-1) {
 
 		$now = getnow();
 		$day = my_gmdate("N", intval($now));
@@ -723,7 +723,7 @@
 
 		$class_chk = mktime($hr, $mt);
 
-    if (!isset($end_margin)) $end_margin = $margin;
+    if (!isset($end_margin) || $end_margin <0 ) $end_margin = $margin;
     //echo "end_margin=".$end_margin;
 
 		$class_st[0] = mktime(15, 00) - $margin; 
